@@ -16,5 +16,7 @@ private:
 	int miFPS = 0;
 	int miFPSCount = 0;
 	PROPERTY_FUNC(int, FPS, miFPS)
+
+
 };
 

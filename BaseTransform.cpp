@@ -4,8 +4,11 @@
 
 BaseTransform::BaseTransform()
 {
-	ZeroMemory(&mRendRect, sizeof(mRendRect));
-	ZeroMemory(&mCutRect, sizeof(mCutRect));
+	mfPosX = 0;
+	mfPosY = 0;
+	miWidth = 0;
+	miHeight = 0;
+	mTag = OBJECTTAG::TAG_NONE;
 }
 
 

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{8c950453-66da-4229-8534-1f475a2ed858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{f7b9b315-e5fd-44f2-8c59-b1e47ae8ba37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalFile">
+      <UniqueIdentifier>{f77b3135-29cc-44d1-af8f-7ad439bd6e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalFile\cpp">
+      <UniqueIdentifier>{c93cb41b-d297-40e6-8e19-7520149408d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalFile\h">
+      <UniqueIdentifier>{b977c98c-8d11-4a55-8537-33c6af2d8310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\cpp">
+      <UniqueIdentifier>{3bff739d-5275-4e51-9db4-80603fb20a92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\h">
+      <UniqueIdentifier>{67492985-3885-4024-a902-2e3b668bcfd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\cpp">
+      <UniqueIdentifier>{3849812b-e5cd-4f0d-af72-27374eccfc37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\h">
+      <UniqueIdentifier>{0f01e7fd-8931-425a-8b14-786edb9e8ca0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseAnimImageObject.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAnimTransform.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCollObject.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseImageObject.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTargetObject.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTransform.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BombAnimation.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>GlobalFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameCheckManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTon.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAnimation.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseAnimImageObject.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAnimTransform.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCollObject.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseImageObject.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTargetObject.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTransform.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BombAnimation.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameCheckManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTon.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimation.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCommon.h">
+      <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

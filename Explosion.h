@@ -1,19 +1,15 @@
 #pragma once
-class Explosion
+class Explosion : public BaseImageObject
 {
 public:
 	
 
-	void Init(int x, int y, int w, int h, int tw, int th, int tTime);
-	void Update();
+	void Init(int x, int y, int w, int h, int tw, int th, int tTime, IMAGETYPE type);
+	bool Update();
 	void Render(HDC backDC);
 	void Release();
 
-
-	PROPERTY_FUNC(POINT, pPos, mPos)
 	PROPERTY_FUNC(bool, IsUse, mIsUse)
-	PROPERTY_FUNC(int, Width, miWidth)
-	PROPERTY_FUNC(int, Height, miHeight)
 	PROPERTY_FUNC(RECT, CollRect, mCollRect)
 
 	PROPERTY_FUNC(int, TotalTime, miTotalTime)
@@ -27,10 +23,6 @@ public:
 	Explosion();
 	virtual ~Explosion();
 private:
-	HDC mHmemDC;
-	POINT mPos;
-	int miWidth;
-	int miHeight;
 	int miTotalWidth;
 	int miTotalHeight;
 	int miTotalTime;

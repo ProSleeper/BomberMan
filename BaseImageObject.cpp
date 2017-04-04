@@ -1,30 +1,42 @@
 #include "GameCommon.h"
 
 
-void BaseImageObject::Init(int rendX, int rendY, int rendWidth, int rendHeight, int cutX, int cutY, int cutWidth, int cutHeight, IMAGEBIT type)
+void BaseImageObject::Init(int x, int y, int w, int h, IMAGETYPE type)
 {
 	mpImage = IMAGEMGR->GetImage(type);
 
-	mRendRect.left = rendX;
-	mRendRect.top = rendY;
-	mRendRect.right = rendWidth;
-	mRendRect.bottom = rendHeight;
+	mfPosX = x;
+	mfPosY = y;
+	miWidth = w;
+	miHeight = h;
+}
 
-	mCutRect.left = cutX;
-	mCutRect.top = cutY;
-	mCutRect.right = cutWidth;
-	mCutRect.bottom = cutHeight;
+void BaseImageObject::Init(int x, int y, IMAGETYPE type)
+{
+	mpImage = IMAGEMGR->GetImage(type);
+
+	mfPosX = x;
+	mfPosY = y;
+	miWidth = mpImage->GetWidth();
+	miHeight = mpImage->GetHeight();
+
 }
 
 void BaseImageObject::Render(HDC backDC)
 {
-	//
-	mpImage->RenderImage(backDC, mRendRect, mCutRect);
+	mpImage->RenderImage(backDC, mfPosX, mfPosY);
+}
+
+void BaseImageObject::Render(HDC backDC, Image* pBack, int w)
+{
+	pBack->RenderImage(backDC, mfPosX, mfPosY);
+	mpImage->RenderImage(backDC, mfPosX, mfPosY, w);
 }
 
 BaseImageObject::BaseImageObject()
 {
 	mpImage = nullptr;
+	mbCollider = false;
 }
 
 

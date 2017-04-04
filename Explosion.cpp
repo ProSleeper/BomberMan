@@ -1,10 +1,10 @@
 #include "GameCommon.h"
 
 
-void Explosion::Init(int x, int y, int w, int h, int tw, int th, int tTime)
+void Explosion::Init(int x, int y, int w, int h, int tw, int th, int tTime, IMAGETYPE type)
 {
-	mPos.x = x;
-	mPos.y = y;
+	mfPosX = x;
+	mfPosY = y;
 	miWidth = w;
 	miHeight = h;
 
@@ -19,19 +19,9 @@ void Explosion::Init(int x, int y, int w, int h, int tw, int th, int tTime)
 	miNextTime = ((float)miTotalTime / miTotalFrame) * 1000;
 	miOldTime = timeGetTime();
 	miCalTime = miNextTime;
-
-	HDC hdc = GetDC(WINMGR->GethWnd());
-	HBITMAP bit;
-
-	mHmemDC = CreateCompatibleDC(hdc);
-	bit = static_cast<HBITMAP>(LoadImage(nullptr, "explosion.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE));
-	SelectObject(mHmemDC, bit);
-
-
-	ReleaseDC(WINMGR->GethWnd(), hdc);
 }
 
-void Explosion::Update()
+bool Explosion::Update()
 {
 	miCurTime = timeGetTime() - miOldTime;
 	if (miCurTime >= miCalTime)
@@ -41,11 +31,7 @@ void Explosion::Update()
 
 		if (miCurFrame >= miTotalFrame)
 		{
-			miCurFrame = 0;
-			miCurFrameX = 0;
-			miCurFrameY = 0;
-			miCalTime = miNextTime;
-			miOldTime = timeGetTime();
+			return false;
 		}
 
 		if(miFrameY > 1)
@@ -61,7 +47,7 @@ void Explosion::Render(HDC backDC)
 	int x, y;
 	x = miCurFrameX * miWidth;
 	y = miCurFrameY * miHeight;
-	TransparentBlt(backDC, mPos.x, mPos.y, miWidth, miHeight, mHmemDC, x, y, miWidth, miHeight, RGB(0, 0, 0));
+	mpImage->RenderImage(backDC, mfPosX, mfPosY, x, y);
 }
 
 void Explosion::Release()
@@ -70,11 +56,7 @@ void Explosion::Release()
 
 Explosion::Explosion()
 {
-	mHmemDC = nullptr;
-	mPos.x = 0;
-	mPos.y = 0;
-	miWidth = 0;
-	miHeight = 0;
+	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_EXPLOSION);
 	miTotalWidth = 0;
 	miTotalHeight = 0;
 	miTotalTime = 0;

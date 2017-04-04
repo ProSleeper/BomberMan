@@ -5,14 +5,9 @@ void GameManager::Init()
 {
 	mHdc = GetDC(WINMGR->GethWnd());
 	IMAGEMGR->LoadImages(mHdc);
-	mBackImg = IMAGEMGR->GetImage(IMAGEBIT::OBJ_BACK);
-
-	//mMap.Init(ScreenSizeX / 2, ScreenSizeY / 2, 50, 50,/**/ 17, 14, 16, 16, IMAGEBIT::OBJ_MAP);
-	//mMap2.Init(ScreenSizeX / 2 - 50, ScreenSizeY / 2, 50, 50,/**/ 34, 14, 16, 16, IMAGEBIT::OBJ_MAP);
-
-	//mBomb.Init(ScreenSizeX / 2, ScreenSizeY / 2, 50, 50,/**/ 34, 48, 16, 16, IMAGEBIT::OBJ_MAP);
-	
-	//mPlayer.Init(ScreenSizeX / 2, ScreenSizeY / 2, 90, 90,/**/ 0, 0, 68, 68, IMAGEBIT::ACTOR_PLAYER);
+	mGround = IMAGEMGR->GetImage(IMAGETYPE::IT_BACK);
+	mAnimation = new PlayerAnimation(IMAGETYPE::IT_SPRITE);
+	mAnimation->Init(0, 0, 64, 64, 128, 64, 0.5);
 	
 }
 
@@ -21,69 +16,109 @@ void GameManager::Loop()
 	if (FPSMGR->LimitFps() == false)
 	{
 		return;
-	}
 
+	}
+	
 	Update();
 	Render();
 }	
 
 void GameManager::Update()
 {
-	//FPSMGR->Update();
-	//mPlayer.Update();
+	FPSMGR->Update();
+	mAnimation->Update();
+	
+
+	//플레이어 좌표 얻기
+	/*pPointX = mPlayer->GetPosX();
+	pPointY = mPlayer->GetPosY();*/
+
 }
 
 void GameManager::Render()
 {
-	/*RECT rect;
-	rect.left = 0;
-	rect.top = 0;
-	rect.right = ScreenSizeX;
-	rect.bottom = ScreenSizeY;*/
-	//FillRect(mBackImg->GetMemdc(), &rect, GetSysColorBrush(COLOR_WINDOW));
+	MapManager::Instance()->Render(mGround->GetMemdc());
+	mAnimation->Render(mGround->GetMemdc());
+	DebugView();
 
-	//mMap.Render(mBackImg->GetMemdc());
-	//mMap2.Render(mBackImg->GetMemdc());
-	//mBomb.Render(mBackImg->GetMemdc());
-	//mPlayer.Render(mBackImg->GetMemdc());
-
+	BitBlt(mHdc, 0, 0, ScreenSizeX, ScreenSizeY, mGround->GetMemdc(), 0, 0, SRCCOPY);
 	
-
-	
-
-	//어떠한 정보 표시할때 쓰면 됨
-	//DebugView();
-	
-	BitBlt(mHdc, 0, 0, ScreenSizeX, ScreenSizeY, mBackImg->GetMemdc(), 0, 0, SRCCOPY);
 }
 
 void GameManager::Release()
 {
-	DeleteObject(mHbackDc);
+	DeleteObject(mGround->GetMemdc());
 	ReleaseDC(WINMGR->GethWnd(), mHdc);
 }
 
 void GameManager::DebugView()
 {
-	char buff[32] = {0};
-	sprintf_s(buff, "FPS: %d", FPSMGR->GetFPS());
-	TextOut(mBackImg->GetMemdc(), 1, 1, buff, strlen(buff));
-	/*int x = 10;
+	int x = 10;
 	int y = 10;
 	char cTextBuffer[128] = {0,};
 
-	sprintf_s(cTextBuffer, "<총알정보>");
-	TextOut(mHbackDc, x, y += 20, cTextBuffer, strlen(cTextBuffer));
+	sprintf_s(cTextBuffer, "FPS: %d", FPSMGR->GetFPS());
+	TextOut(mGround->GetMemdc(), 1, 1, cTextBuffer, (int)strlen(cTextBuffer));
 
-	LISTBULLETS* listBullet = mPlayer.GetBullets();
-	int iCount = 0;
+	/*sprintf_s(buff, "플레이어 좌표: %d, %d", mAnimation->GetpPos().x, mAnimation->GetpPos().y);
+	TextOut(mBackImg->GetMemdc(), 1, y += 20, buff, strlen(buff));*/
+
+	/*sprintf_s(cTextBuffer, "<총알정보>");
+	TextOut(mpBack->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));*/
+
+	//LISTBULLETS* listBullet = mPlayer.GetBullets();
+	/*int iCount = 0;
 	for(BULLETITOR iter = listBullet->begin(); iter != listBullet->end(); iter++)
 	{
 		iCount++;
 		sprintf_s(cTextBuffer, "%d 번째: (%d , %d)", iCount, (*iter)->GetpPos().x, (*iter)->GetpPos().y);
-		TextOut(mHbackDc, x, y += 20, cTextBuffer, strlen(cTextBuffer));
+		TextOut(mpBack->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
 	}*/
 
+	/*sprintf_s(cTextBuffer, "Explosion Info");
+	TextOut(mpBack->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
+
+	sprintf_s(cTextBuffer, " TotalTime(%d), FrameX(%d), FrameY(%d)", mExplosion.GetTotalTime(), mExplosion.GetFrameX(), mExplosion.GetFrameY());
+	TextOut(mpBack->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
+
+	sprintf_s(cTextBuffer, " CurTime(%d), CurFrame(%d), CurX(%d), CurY(%d)", mExplosion.GetCurTime(), mExplosion.GetCurFrame(), mExplosion.GetCurFrameX(), mExplosion.GetCurFrameY());
+	TextOut(mpBack->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));*/
+
+}
+
+void GameManager::CreateObject(BaseTransform * pObj, bool bColl)
+{
+	mListObjects.push_back(pObj);
+	if (bColl)
+	{
+		pObj->SetCollider(true);
+		COLLMGR->CreateCollider(pObj);
+	}
+}
+
+void GameManager::DeleteObjectCheck()
+{
+	for(auto iter = mListObjects.begin(); iter != mListObjects.end();)
+	{
+		BaseTargetObject* pObj = (BaseTargetObject*)(*iter);
+
+		if (pObj->GetLife() == false)
+		{
+			ENEMYMGR->DeleteEnemy((*iter));
+
+			if (pObj->GetCollider() == true)
+			{
+				COLLMGR->DeleteCollider((*iter));
+			}
+			
+   			delete pObj;
+			iter = mListObjects.erase(iter);
+		}
+		else
+		{
+			iter++;
+		}
+	}
 }
 
 GameManager::GameManager()

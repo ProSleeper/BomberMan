@@ -1,5 +1,5 @@
 #pragma once
-class Map : public BaseImageObject
+class Map : public BaseAnimImageObject
 {
 public:
 	Map();

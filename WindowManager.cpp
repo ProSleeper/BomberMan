@@ -12,7 +12,7 @@ WindowManager::~WindowManager()
 {
 }
 
-void WindowManager::CreateWindowManager(HINSTANCE hInst, int sizeX, int sizeY, char *name)
+void WindowManager::CreateWindowManager(HINSTANCE hInst, int w, int h, char *name)
 {
 	mHinst = hInst;
 
@@ -32,9 +32,11 @@ void WindowManager::CreateWindowManager(HINSTANCE hInst, int sizeX, int sizeY, c
 
 	RegisterClass(&WndClass);
 
-	mHwnd = CreateWindow(name, name, WS_BORDER | WS_CAPTION | WS_SYSMENU, 100, 100, sizeX, sizeY, NULL, (HMENU)NULL, mHinst, NULL);
+	mHwnd = CreateWindow(name, name, WS_BORDER | WS_CAPTION | WS_SYSMENU, 100, 100, w, h, NULL, (HMENU)NULL, mHinst, NULL);
 
 	ShowWindow(mHwnd, SW_SHOW);
+
+	//ResizeWindow();
 }
 
 int WindowManager::GameLoop()
@@ -75,4 +77,27 @@ LRESULT CALLBACK  WindowManager::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam
 	}
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
+
+
+//양 옆 베젤 빼고 정확한 윈도우 사이즈 구하는 방법
+//void WindowManager::ResizeWindow()
+//{
+//	RECT oldRect;
+//	DWORD windowStyle = (DWORD)GetWindowLong(mHwnd, GWL_STYLE);
+//
+//	GetWindowRect(mHwnd, &oldRect);
+//
+//	RECT newRect;
+//	newRect.left = 0;
+//	newRect.top = 0;
+//	newRect.right = miWidth;
+//	newRect.bottom = miHeight;
+//
+//	AdjustWindowRect(&newRect, windowStyle, NULL);
+//
+//	int width = (newRect.right - newRect.left);
+//	int height = (newRect.bottom - newRect.top);
+//
+//	SetWindowPos(mHwnd, HWND_NOTOPMOST, oldRect.left, oldRect.top, width, height, SWP_SHOWWINDOW);
+//}
 

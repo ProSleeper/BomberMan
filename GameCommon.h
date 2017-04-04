@@ -5,11 +5,15 @@
 #include <algorithm>
 #include <list>
 #include <random>
+#include <cstdlib>
+#include <time.h>
 
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "msimg32.lib")
 
 using namespace std;
+
+#define ROOT2 1.41421f
 
 #define PROPERTY_FUNC(_Type, _FuncName, _Value)\
 public: _Type Get##_FuncName()\
@@ -17,14 +21,18 @@ public: _Type Get##_FuncName()\
 public: void Set##_FuncName(_Type _v)\
 {_Value = _v;}
 
-#define PROPERTYGET_FUNC(Type, FuncName, Value)\
+#define PROPERTYARRAY_FUNC(Type, FuncName, Value)\
 public : Type Get##FuncName()\
 {return Value;}
+
 
 #define WINMGR WindowManager::Instance()
 #define GAMEMGR GameManager::Instance()
 #define FPSMGR FrameCheckManager::Instance()
 #define IMAGEMGR ImageManager::Instance()
+#define COLLMGR CollisionManager::Instance()
+#define ENEMYMGR EnemyManager::Instance()
+#define EFECTMGR EffectManager::Instance()
 
 #define GETKEY(ARROW) ((GetAsyncKeyState(ARROW) & 0x8000) == 0x8000)
 #define GETKEYDOWN(key, value, func)\
@@ -33,7 +41,7 @@ value == false)\
 {func(); value = true;}\
 if(value)\
 {\
-	if((GetAsyncKeyState(key) & 0x8001) == 0x8000)\
+	if((GetAsyncKeyState(key) & 0x8001) == 0x0000)\
 	{value = false;}\
 }
 
@@ -43,46 +51,86 @@ value == false)\
 { value = true;}\
 if(value)\
 {\
-	if((GetAsyncKeyState(key) & 0x8001) == 0x8000)\
+	if((GetAsyncKeyState(key) & 0x8001) == 0x0000)\
 	{func();value = false;}\
 }
 
-enum class IMAGEBIT
+enum class OBJECTTAG
 {
-	OBJ_BACK = 0,
-	OBJ_MAP,
-	OBJ_OBJECT,
-	OBJ_WALL,
-	OBJ_BOX,
-	OBJ_BOMB,
-	ACTOR_PLAYER,
-	ACTOR_ENEMY,
-	IMGBIT_MAX
+	TAG_NONE,
+	TAG_PLAYER,
+	TAG_PLAYER_BULLET,
+	TAG_ENEMY,
+	TAG_ENEMY_BULLET,
+	TAG_BOSS,
+	TAG_MAX
 };
 
+enum class VECTORBULLET
+{
+	VB_NORTH,
+	VB_SOUTH,
+	VB_EAST,
+	VB_WEST
+};
 
-#include "Singleton.cpp"
-#include "Image.h"
-#include "BaseTransform.h"
-#include "BaseImageObject.h"
-#include "ImageManager.h"
-#include "Time.h"
-#include "FrameCheckManager.h"
-#include "Map.h"
-#include "Object.h"
-#include "Wall.h"
-#include "Box.h"
-#include "Bomb.h"
-#include "Actor.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Explosion.h"
+enum class IMAGETYPE
+{
+	IT_BACK = 0,
+	IT_MAP,
+	IT_PLAYER,
+	IT_ENEMY,
+	IT_OBJECT,
+	IT_WALL,
+	IT_BOMB,
+	IT_EXPLOSION,
+	IT_SPRITE,
+	IT_MAX
+};
+
+enum class PLAYERMOVE
+{
+	PM_UP = 0,
+	PM_DOWN,
+	PM_LEFT,
+	PM_RIGHT
+};
+
+#include "SingleTon.cpp"
 #include "WindowManager.h"
-#include "GameManager.h"
+#include "Image.h"
+#include "ImageManager.h"
+#include "BaseTransform.h"
+#include "BaseAnimTransform.h"
+#include "BaseImageObject.h"
+#include "BaseAnimImageObject.h"
+#include "BaseTargetObject.h"
+#include "BaseCollObject.h"
+#include "Time.h"
+#include "CollisionManager.h"
+#include "Map.h"
+#include "Enemy.h"
 
+#include "EnemyManager.h"
+
+#include "Explosion.h"
+#include "EffectManager.h"
+#include "BombAnimation.h"
+#include "PlayerAnimation.h"
+#include "GameManager.h"
+#include "FrameCheckManager.h"
+#include "Wall.h"
+#include "RenderManager.h"
+
+#include "Object.h"
+#include "MapManager.h"
+#include "Box.h"
+
+#include "Actor.h"
 
 
 static const int ScreenSizeX = 1600;
 static const int ScreenSizeY = 900;
+
 
 

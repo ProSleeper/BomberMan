@@ -2,13 +2,24 @@
 class BaseTransform
 {
 public:
-	PROPERTY_FUNC(RECT, pRendRect, mRendRect)
-	PROPERTY_FUNC(RECT, pCutRect, mCutRect)
+	PROPERTY_FUNC(float, PosX, mfPosX)
+	PROPERTY_FUNC(float, PosY, mfPosY)
+	PROPERTY_FUNC(int, Width, miWidth)
+	PROPERTY_FUNC(int, Height, miHeight)
+	OBJECTTAG mTag;
+	PROPERTY_FUNC(OBJECTTAG, Tag, mTag)
+	
+	PROPERTY_FUNC(bool, Collider, mbCollider)
+	
+
 
 	BaseTransform();
 	virtual ~BaseTransform();
 protected:
-	RECT mRendRect;
-	RECT mCutRect;
+	float mfPosX;
+	float mfPosY;
+	int miWidth;
+	int miHeight;
+	bool mbCollider;
 };
 

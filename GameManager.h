@@ -1,10 +1,30 @@
 #pragma once
+
+enum class OBJECTTYPE
+{
+	OT_MAP,
+	OT_PLAYER,
+	OT_ENEMY,
+
+	OT_MAX
+};
+
 class GameManager : public SingleTon<GameManager>
 {
 public:
+
 	
-	PROPERTY_FUNC(HDC, Hdc, mHdc)
-	PROPERTY_FUNC(HDC, BackHdc, mHbackDc)
+	PROPERTY_FUNC(HDC, HDC, mHdc)
+	PROPERTY_FUNC(float, pPointX, pPointX)
+	PROPERTY_FUNC(float, pPointY, pPointY)
+		/*static GameManager* Instance()
+		{
+			if(instance == nullptr)
+			{
+				instance = new GameManager;
+			}
+			return instance;
+		}*/
 	
 	void Init();
 	void Loop();
@@ -12,22 +32,30 @@ public:
 	void Render();
 	void Release();
 	void DebugView();
+
+
+	void CreateObject(BaseTransform* pObj, bool bColl);
+	
+	PROPERTYARRAY_FUNC(list<BaseTransform*>*, Objects, &mListObjects)
 	
 
 	GameManager();
 	virtual ~GameManager();
 private:
 	HDC mHdc;
-	HDC mHbackDc;
-	Image* mBackImg;
+	//HDC mHbackDc;
+	Image* mGround;
+	float pPointX;
+	float pPointY;
 
-	Player mPlayer;
-	Map mMap;
-	Map mMap2;
-	/*Map mBomb2;
-	Map mBomb1;
-	Map mBomb;*/
+	PlayerAnimation *mAnimation;
+	BombAnimation* bomb;
 
+	//BaseImageObject* mpObjects[static_cast<int>(OBJECTTYPE::OT_MAX)];
+	list<BaseTransform*> mListObjects;
+	
+	void DeleteObjectCheck();
+	/*static GameManager* instance;*/
 };
 
 

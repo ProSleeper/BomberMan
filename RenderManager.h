@@ -3,10 +3,6 @@ class RenderManager
 {
 public:
 
-	SINGLETON_FUNC(RenderManager)
-
-
-
 
 	RenderManager();
 	virtual ~RenderManager();
