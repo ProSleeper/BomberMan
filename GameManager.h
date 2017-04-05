@@ -44,12 +44,12 @@ public:
 private:
 	HDC mHdc;
 	//HDC mHbackDc;
-	Image* mGround;
+	Image* mMap;
 	float pPointX;
 	float pPointY;
 
-	PlayerAnimation *mAnimation;
-	BombAnimation* bomb;
+	Player *mAnimation;
+	Bomb* bomb;
 
 	//BaseImageObject* mpObjects[static_cast<int>(OBJECTTYPE::OT_MAX)];
 	list<BaseTransform*> mListObjects;

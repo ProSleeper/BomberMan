@@ -4,7 +4,7 @@
 void FrameCheckManager::Init()
 {
 	mFpsTime.SetUpTime(1.0f);
-	mLimitTime.SetUpTime(0.01f);
+	mLimitTime.SetUpTime(0.014f);
 }
 
 void FrameCheckManager::Update()

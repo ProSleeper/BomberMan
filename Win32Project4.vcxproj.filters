@@ -60,9 +60,6 @@
     <ClCompile Include="BaseTransform.cpp">
       <Filter>GlobalFile\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="BombAnimation.cpp">
-      <Filter>GlobalFile\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>GlobalFile\cpp</Filter>
     </ClCompile>
@@ -117,16 +114,19 @@
     <ClCompile Include="WindowManager.cpp">
       <Filter>Manager\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="MapManager.cpp">
-      <Filter>Object\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Object\cpp</Filter>
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>Object\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAnimation.cpp">
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
       <Filter>Object\cpp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,9 +147,6 @@
       <Filter>GlobalFile\h</Filter>
     </ClInclude>
     <ClInclude Include="BaseTransform.h">
-      <Filter>GlobalFile\h</Filter>
-    </ClInclude>
-    <ClInclude Include="BombAnimation.h">
       <Filter>GlobalFile\h</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
@@ -209,14 +206,17 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Object\h</Filter>
     </ClInclude>
-    <ClInclude Include="MapManager.h">
-      <Filter>Object\h</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerAnimation.h">
-      <Filter>Object\h</Filter>
-    </ClInclude>
     <ClInclude Include="GameCommon.h">
       <Filter>GlobalFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Object\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

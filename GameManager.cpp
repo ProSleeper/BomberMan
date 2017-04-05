@@ -5,9 +5,12 @@ void GameManager::Init()
 {
 	mHdc = GetDC(WINMGR->GethWnd());
 	IMAGEMGR->LoadImages(mHdc);
-	mGround = IMAGEMGR->GetImage(IMAGETYPE::IT_BACK);
-	mAnimation = new PlayerAnimation(IMAGETYPE::IT_SPRITE);
-	mAnimation->Init(0, 0, 64, 64, 128, 64, 0.5);
+	mMap = IMAGEMGR->GetImage(IMAGETYPE::IT_BACK);
+	mAnimation = new Player(IMAGETYPE::IT_PLAYER);
+	mAnimation->Init(100, 100, 50, 50, 16, 24, 1);
+	
+	
+	
 	
 }
 
@@ -16,7 +19,6 @@ void GameManager::Loop()
 	if (FPSMGR->LimitFps() == false)
 	{
 		return;
-
 	}
 	
 	Update();
@@ -28,26 +30,25 @@ void GameManager::Update()
 	FPSMGR->Update();
 	mAnimation->Update();
 	
-
 	//플레이어 좌표 얻기
 	/*pPointX = mPlayer->GetPosX();
 	pPointY = mPlayer->GetPosY();*/
-
 }
 
 void GameManager::Render()
 {
-	MapManager::Instance()->Render(mGround->GetMemdc());
-	mAnimation->Render(mGround->GetMemdc());
+	MapManager::Instance()->Render(mMap->GetMemdc());
+	mAnimation->Render(mMap->GetMemdc());
+	
 	DebugView();
 
-	BitBlt(mHdc, 0, 0, ScreenSizeX, ScreenSizeY, mGround->GetMemdc(), 0, 0, SRCCOPY);
+	BitBlt(mHdc, 0, 0, ScreenSizeX, ScreenSizeY, mMap->GetMemdc(), 0, 0, SRCCOPY);
 	
 }
 
 void GameManager::Release()
 {
-	DeleteObject(mGround->GetMemdc());
+	DeleteObject(mMap->GetMemdc());
 	ReleaseDC(WINMGR->GethWnd(), mHdc);
 }
 
@@ -58,10 +59,10 @@ void GameManager::DebugView()
 	char cTextBuffer[128] = {0,};
 
 	sprintf_s(cTextBuffer, "FPS: %d", FPSMGR->GetFPS());
-	TextOut(mGround->GetMemdc(), 1, 1, cTextBuffer, (int)strlen(cTextBuffer));
+	TextOut(mMap->GetMemdc(), 1, 1, cTextBuffer, (int)strlen(cTextBuffer));
 
-	/*sprintf_s(buff, "플레이어 좌표: %d, %d", mAnimation->GetpPos().x, mAnimation->GetpPos().y);
-	TextOut(mBackImg->GetMemdc(), 1, y += 20, buff, strlen(buff));*/
+	sprintf_s(cTextBuffer, "플레이어 좌표: %d, %d", mAnimation->GetpPos().x, mAnimation->GetpPos().y);
+	TextOut(mMap->GetMemdc(), 1, y += 20, cTextBuffer, strlen(cTextBuffer));
 
 	/*sprintf_s(cTextBuffer, "<총알정보>");
 	TextOut(mpBack->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));*/

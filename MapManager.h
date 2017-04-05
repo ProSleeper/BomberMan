@@ -12,5 +12,6 @@ private:
 	static const int arrSizeY = 32;
 	static const int MapSize = 50;
 
-	Map arrMap[arrSizeX][arrSizeY];
+	//Map arrMap[arrSizeX][arrSizeY];
+	vector<vector<Map>> arrMap;
 };

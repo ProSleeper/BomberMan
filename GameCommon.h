@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <algorithm>
 #include <list>
+#include <vector>
 #include <random>
 #include <cstdlib>
 #include <time.h>
@@ -77,10 +78,9 @@ enum class VECTORBULLET
 enum class IMAGETYPE
 {
 	IT_BACK = 0,
-	IT_MAP,
+	IT_OBJECT,
 	IT_PLAYER,
 	IT_ENEMY,
-	IT_OBJECT,
 	IT_WALL,
 	IT_BOMB,
 	IT_EXPLOSION,
@@ -115,8 +115,8 @@ enum class PLAYERMOVE
 
 #include "Explosion.h"
 #include "EffectManager.h"
-#include "BombAnimation.h"
-#include "PlayerAnimation.h"
+#include "Bomb.h"
+#include "Player.h"
 #include "GameManager.h"
 #include "FrameCheckManager.h"
 #include "Wall.h"
