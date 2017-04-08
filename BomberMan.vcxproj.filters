@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Manager">
+      <UniqueIdentifier>{e7e5e068-8c2a-491e-8869-9047919f76cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\Cpp">
+      <UniqueIdentifier>{de2cddfc-c9c2-419a-9002-991625d9aab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object">
+      <UniqueIdentifier>{878b0f47-5f38-43e7-a9c0-76d9c3945c15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\h">
+      <UniqueIdentifier>{dbf3187f-f77c-4be7-aecc-90876b18172e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\cpp">
+      <UniqueIdentifier>{7739aa41-9026-40de-b723-7671dc439250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Library">
+      <UniqueIdentifier>{8be766d8-645a-4902-bca9-45434f42dfe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\h">
+      <UniqueIdentifier>{66a94de3-4bcd-4209-9f24-f5c105ef469b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Actor">
+      <UniqueIdentifier>{5587f47b-30e5-47c7-bba3-d613b59e7e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Actor\cpp">
+      <UniqueIdentifier>{adfe9861-f5a2-41ce-a461-d128a622c4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Actor\h">
+      <UniqueIdentifier>{6d7ca5cd-4710-4a77-a197-e826decb2cfc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FrameCheckManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>소스 파일\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>소스 파일\Actor\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\Actor\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>소스 파일\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTon.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTransform.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseImageObject.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>소스 파일\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>소스 파일\Actor\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>소스 파일\Manager\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>소스 파일\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCollObject.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTargetObject.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>소스 파일\Library</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrameCheckManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>소스 파일\Actor\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\Actor\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>소스 파일\Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>소스 파일\Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTransform.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseImageObject.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>소스 파일\Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCommon.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>소스 파일\Actor\h</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>소스 파일\Manager\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>소스 파일\Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCollObject.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTargetObject.h">
+      <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

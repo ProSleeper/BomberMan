@@ -1,9 +1,13 @@
 #pragma once
-class Map : public BaseAnimImageObject
+class Map : public BaseImageObject
 {
 public:
+	PROPERTY_FUNC(bool, IsMove, isMove)
+
 	Map();
 	virtual ~Map();
+private:
+	bool isMove;
 };
 
 //baseImage

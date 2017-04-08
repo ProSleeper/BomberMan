@@ -34,6 +34,8 @@ public : Type Get##FuncName()\
 #define COLLMGR CollisionManager::Instance()
 #define ENEMYMGR EnemyManager::Instance()
 #define EFECTMGR EffectManager::Instance()
+#define OBJECTMGR ObjectManager::Instance()
+#define MAPMGR MapManager::Instance()
 
 #define GETKEY(ARROW) ((GetAsyncKeyState(ARROW) & 0x8000) == 0x8000)
 #define GETKEYDOWN(key, value, func)\
@@ -88,7 +90,7 @@ enum class IMAGETYPE
 	IT_MAX
 };
 
-enum class PLAYERMOVE
+enum class PLAYERDIRECTION
 {
 	PM_UP = 0,
 	PM_DOWN,
@@ -101,36 +103,40 @@ enum class PLAYERMOVE
 #include "Image.h"
 #include "ImageManager.h"
 #include "BaseTransform.h"
-#include "BaseAnimTransform.h"
 #include "BaseImageObject.h"
-#include "BaseAnimImageObject.h"
 #include "BaseTargetObject.h"
 #include "BaseCollObject.h"
 #include "Time.h"
 #include "CollisionManager.h"
 #include "Map.h"
 #include "Enemy.h"
-
+#include "Object.h"
 #include "EnemyManager.h"
 
 #include "Explosion.h"
 #include "EffectManager.h"
 #include "Bomb.h"
 #include "Player.h"
+#include "Wall.h"
+#include "Box.h"
 #include "GameManager.h"
 #include "FrameCheckManager.h"
-#include "Wall.h"
+
 #include "RenderManager.h"
 
-#include "Object.h"
+
+#include "ObjectManager.h"
 #include "MapManager.h"
-#include "Box.h"
+
 
 #include "Actor.h"
 
 
-static const int ScreenSizeX = 1600;
-static const int ScreenSizeY = 900;
+const int ScreenSizeX = 1600;
+const int ScreenSizeY = 900;
 
+const int arrSizeX = 15;
+const int arrSizeY = 27;
+const int MapSize = 60;
 
-
+const int PlayerSpeed = 3;

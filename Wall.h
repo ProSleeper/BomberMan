@@ -1,5 +1,5 @@
 #pragma once
-class Wall
+class Wall : public BaseImageObject
 {
 public:
 	Wall();

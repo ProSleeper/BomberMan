@@ -14,11 +14,11 @@ public:
 
 	bool RePosCheck(BaseTransform* pTarget);
 
-	PROPERTYARRAY_FUNC(list<BaseCollObject*>*, Collider, &mCollObj)
+	PROPERTYARRAY_FUNC(vector<BaseCollObject*>*, Collider, &mCollObj)
 	CollisionManager();
 	virtual ~CollisionManager();
 private:
-	list<BaseCollObject*> mCollObj;
+	vector<BaseCollObject*> mCollObj;
 	bool collTag[static_cast<int>(OBJECTTAG::TAG_MAX)][static_cast<int>(OBJECTTAG::TAG_MAX)] = {0,};
 
 

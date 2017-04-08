@@ -2,6 +2,7 @@
 
 Map::Map()
 {
+	isMove = true;
 }
 
 

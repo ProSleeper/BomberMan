@@ -20,14 +20,16 @@ void CollisionManager::Update()
 
 		for(nextIter; nextIter != mCollObj.end(); nextIter++)
 		{
+
+			//이 부분을 나한테 맞게 바꿔야할듯
 			if (IsCollision((*iter), (*nextIter)) && GetCollTag((*iter)->GetTarget()->GetTag(), (*nextIter)->GetTarget()->GetTag()))
 			{
 				//충돌처리
 				/*BaseImageObject* pSrc = (BaseImageObject*)(*iter)->GetTarget();
 				BaseImageObject* pDest = (BaseImageObject*)(*nextIter)->GetTarget();*/
 
-				BaseTargetObject* pSrc = dynamic_cast<BaseTargetObject*>((*iter)->GetTarget());
-				BaseTargetObject* pDest = dynamic_cast<BaseTargetObject*>((*nextIter)->GetTarget());
+				BaseImageObject* pSrc = dynamic_cast<BaseImageObject*>((*iter)->GetTarget());
+				BaseImageObject* pDest = dynamic_cast<BaseImageObject*>((*nextIter)->GetTarget());
 				pSrc->OnCollisionEnter(pDest);
 				pDest->OnCollisionEnter(pSrc);
 			}
@@ -110,7 +112,7 @@ bool CollisionManager::RePosCheck(BaseTransform* pTarget)
 		return false;
 	}
 	
-	for(list<BaseCollObject*>::iterator iter = mCollObj.begin(); iter != mCollObj.end(); iter++)
+	for(auto iter = mCollObj.begin(); iter != mCollObj.end(); iter++)
 	{
 		BaseCollObject* pObj = (BaseCollObject*)pTarget;
 		if (IsCollision(pObj, (*iter)) == true)

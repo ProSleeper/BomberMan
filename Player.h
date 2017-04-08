@@ -9,6 +9,9 @@ public:
 	void Render(HDC backDC);
 	void Release();
 
+	void MoveCheck(int pos, PLAYERDIRECTION pm);
+	void Player::RectColl(RECT& rect, int x, int y, int w, int h);
+
 	PROPERTY_FUNC(POINT, pPos, mPos)
 	PROPERTY_FUNC(int, Width, miWidth)
 	PROPERTY_FUNC(int, Height, miHeight)
@@ -28,6 +31,19 @@ private:
 	Image* mpImage;
 	Bomb* bomb;
 	bool IsBomb = false;
+
+	RECT up;
+	RECT down;
+	RECT left;
+	RECT right;
+
+	bool mbUp;
+	bool mbDown;
+	bool mbLeft;
+	bool mbRight;
+
+	int arrX;
+	int arrY;
 
 };
 

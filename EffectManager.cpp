@@ -2,16 +2,16 @@
 
 void EffectManager::CreateEffect(int x, int y)
 {
- 	Explosion* explosion = new Explosion;
+	/*Explosion* explosion = new Explosion;
 	explosion->Init(x, y, 40, 40, 320, 40, 1, IMAGETYPE::IT_EXPLOSION);
-	mListEffects.push_back(explosion);
+	mListEffects.push_back(explosion);*/
 }
 
 void EffectManager::Update()
 {
 	//for_each(mListEffects.begin(), mListEffects.end(), [&](BaseImageObject* bio){bio->Update(); });
 
-	for (auto iter = mListEffects.begin();  iter != mListEffects.end();)
+	/*for (auto iter = mListEffects.begin();  iter != mListEffects.end();)
 	{
 		BaseImageObject* pObj = (BaseImageObject*)(*iter);
 		if (pObj->Update() == false)
@@ -23,24 +23,24 @@ void EffectManager::Update()
 		{
 			iter++;
 		}
-	}
+	}*/
 }
 
 void EffectManager::Render(HDC backDC)
 {
 
-	for(auto iter = mListEffects.begin(); iter != mListEffects.end(); iter++)
+	/*for(auto iter = mListEffects.begin(); iter != mListEffects.end(); iter++)
 	{
 		BaseImageObject* pObj = (BaseImageObject*)(*iter);
 		pObj->Render(backDC);
-	}
+	}*/
 	//for_each(mListEffects.begin(), mListEffects.end(), [&](BaseImageObject* bio){bio->Render(backDC);});
 }
 
 void EffectManager::Release()
 {
-	for_each(mListEffects.begin(), mListEffects.end(), [&](BaseTransform* bco){delete bco; });
-	mListEffects.clear();
+	/*for_each(mListEffects.begin(), mListEffects.end(), [&](BaseTransform* bco){delete bco; });
+	mListEffects.clear();*/
 }
 
 EffectManager::EffectManager()

@@ -8,96 +8,73 @@ void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float 
 	miWidth = w;
 	miHeight = h;
 
+	mbUp = true;
+	mbDown = true;
+	mbLeft = true;
+	mbRight = true;
+
 	startX = 72;
 	startY = 46;
 	this->useSizeX = useSizeX;
 	this->useSizeY = useSizeY;
 	bomb = new Bomb(IMAGETYPE::IT_OBJECT);
-	
 }
-
 
 bool Player::Update()
 {
-	if((GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000)
+	if((GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000 && mbUp)
 	{
-		startX = 72;
-		startY = 20;
-		mPos.y -= 3;
-		int temp = mPos.x % 50;
-		if(temp == 0)
+		mPos.y -= PlayerSpeed;
+		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_UP))
 		{
-		}
-		else if(temp < 25)
-		{
-			mPos.x -= temp;
+			mPos.y += PlayerSpeed;
 		}
 		else
 		{
-			mPos.x += (50 - temp);
+			mPos.x = ((mPos.x + 30)/ 60) * 60;
 		}
 	}
-	else if((GetAsyncKeyState(VK_DOWN) & 0x8000) == 0x8000)
+	else if((GetAsyncKeyState(VK_DOWN) & 0x8000) == 0x8000 && mbDown)
 	{
-		startX = 71;
-		startY = 46;
-		mPos.y += 3;
-
-		int temp = mPos.x % 50;
-		if(temp == 0)
+		mPos.y += PlayerSpeed;
+		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_DOWN))
 		{
-		}
-		else if(temp < 25)
-		{
-			mPos.x -= temp;
+			mPos.y -= PlayerSpeed;
 		}
 		else
 		{
-			mPos.x += (50 - temp);
+			mPos.x = ((mPos.x + 30) / 60) * 60;
 		}
 	}
-	else if((GetAsyncKeyState(VK_LEFT) & 0x8000) == 0x8000)
+	else if((GetAsyncKeyState(VK_LEFT) & 0x8000) == 0x8000 && mbLeft)
 	{
-		startX = 2;
-		startY = 44;
-		mPos.x -= 3;
-		int temp = mPos.y % 50;
-
-		if (temp == 0)
+		mPos.x -= PlayerSpeed;
+		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_LEFT))
 		{
-		}
-		else if (temp < 25)
-		{
-			mPos.y -= temp;
+			mPos.x += PlayerSpeed;
 		}
 		else
 		{
-			mPos.y += (50 - temp);
+			mPos.y = ((mPos.y + 30) / 60) * 60;
 		}
-
 	}
-	else if((GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000)
+	else if((GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000 && mbRight)
 	{
-		startX = 106;
-		startY = 47;
-		mPos.x += 3;
-		int temp = mPos.y % 50;
-
-		if(temp == 0)
+		mPos.x += PlayerSpeed;
+		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_RIGHT))
 		{
-		}
-		else if(temp < 25)
-		{
-			mPos.y -= temp;
+			mPos.x -= PlayerSpeed;
 		}
 		else
 		{
-			mPos.y += (50 - temp);
+			mPos.y = ((mPos.y + 30) / 60) * 60;
 		}
 	}
 	GETKEYDOWN(VK_SPACE, mIsBomb, Release)
 
 	bomb->Update();
+
+
 	return true;
 }
 
@@ -105,41 +82,47 @@ void Player::Render(HDC backDC)
 {
 	mpImage->RenderImage(backDC,mPos.x, mPos.y, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
 	int temp = SetROP2(backDC, R2_MASKPEN);
-	Rectangle(backDC, mPos.x, mPos.y, mPos.x + 50, mPos.y + 50);
+	Rectangle(backDC, mPos.x, mPos.y, mPos.x + 60, mPos.y + 60);
+	
 	SetROP2(backDC, temp);
+
+	
+	/*Rectangle(backDC, up.left, up.top, up.right, up.bottom);
+	Rectangle(backDC, down.left, down.top, down.right, down.bottom);
+	Rectangle(backDC, left.left, left.top, left.right, left.bottom);
+	Rectangle(backDC, right.left, right.top, right.right, right.bottom);*/
+
+	//MAPMGR->
 
 	if (IsBomb)
 	{
 		bomb->Render(backDC);
 	}
-	
 }
 
 void Player::Release()
 {       
 	int CenterX = 0;
 	int CenterY = 0;
-	if (mPos.x % 50 >= 25)
+	if (mPos.x % 60 >= 35)
 	{
-		CenterX = ((mPos.x / 50) * 50) + 50;
+		CenterX = ((mPos.x / 60) * 60) + 60;
 	}
 	else
 	{
-		CenterX = (mPos.x / 50) * 50;
+		CenterX = (mPos.x / 60) * 60;
 	}
 
-	if((mPos.y + 25) % 50 >= 25)
+	if((mPos.y) % 60 >= 35)
 	{
-		CenterY = (((mPos.y + 25) / 50) * 50) + 50;
+		CenterY = (((mPos.y) / 60) * 60) + 60;
 	}
 	else
 	{
-		CenterY = ((mPos.y + 25) / 50) * 50;
+		CenterY = ((mPos.y) / 60) * 60;
 	}
 
-
-	
-	bomb->Init(CenterX, CenterY, 50, 50,/**/ 67, 16, 1);
+	bomb->Init(CenterX, CenterY, 60, 60,/**/ 67, 16, 1);
 	IsBomb = true;
 }
 
@@ -157,7 +140,30 @@ Player::~Player()
 	Release();
 }
 
-void BombDown()
+//void Player::MoveLock(LONG& rhs)
+//{
+//	int temp = rhs % 60;
+//
+//	if(temp == 0)
+//	{
+//	}
+//	else if(temp < 10)
+//	{
+//		rhs -= temp;
+//	}
+//	else 
+//	{
+//		rhs += (60 - temp);
+//	}
+//}
+void Player::MoveCheck(int pos, PLAYERDIRECTION pm)
 {
+}
 
+void Player::RectColl(RECT& rect, int x, int y, int w, int h)
+{
+	rect.left = mPos.x + x;
+	rect.top = mPos.y + y;
+	rect.right = mPos.x + w;
+	rect.bottom = mPos.y + h;
 }

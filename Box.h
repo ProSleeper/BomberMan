@@ -1,5 +1,5 @@
 #pragma once
-class Box
+class Box : public BaseImageObject
 {
 public:
 	Box();

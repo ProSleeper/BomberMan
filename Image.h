@@ -13,7 +13,7 @@ public:
 	void RenderImage(HDC backHdc, int x, int y);
 	void RenderImage(HDC backHdc, int x, int y, int imgX, int imgY);
 	void RenderImage(HDC backHdc, int x, int y, int w);
-	void RenderImage(HDC backHdc, RECT rendRect, RECT cutRect);
+	void RenderImage(HDC backHdc, int x, int y, int width, int height, RECT cutRect);
 	void RenderImage(HDC backHdc, int posX, int posY, int Width, int Height, int x, int y, int imgX, int imgY);
 	void ReleaseImage();
 

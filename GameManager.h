@@ -5,7 +5,6 @@ enum class OBJECTTYPE
 	OT_MAP,
 	OT_PLAYER,
 	OT_ENEMY,
-
 	OT_MAX
 };
 
@@ -32,6 +31,7 @@ public:
 	void Render();
 	void Release();
 	void DebugView();
+	void ObjectSetting();
 
 
 	void CreateObject(BaseTransform* pObj, bool bColl);
@@ -44,12 +44,14 @@ public:
 private:
 	HDC mHdc;
 	//HDC mHbackDc;
-	Image* mMap;
+	Image* mBackGround;
 	float pPointX;
 	float pPointY;
 
-	Player *mAnimation;
+	Player *mPlayer;
 	Bomb* bomb;
+	Wall* mWall;
+	Box* mBox;
 
 	//BaseImageObject* mpObjects[static_cast<int>(OBJECTTYPE::OT_MAX)];
 	list<BaseTransform*> mListObjects;

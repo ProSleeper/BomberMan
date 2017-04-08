@@ -42,7 +42,7 @@ void Image::RenderImage(HDC backHdc, int x, int y)
 	}
 	else
 	{
-		TransparentBlt(backHdc, x, y, miWidth, miHeight, mHmemDc, 0, 0, miWidth, miHeight, mDwColor);
+		TransparentBlt(backHdc, x, y, miWidth, miHeight, mHmemDc, 0, 0, 16, 16, mDwColor);
 	}
 }
 
@@ -57,11 +57,11 @@ void Image::RenderImage(HDC backHdc, int posX, int posY, int Width, int Height, 
 		TransparentBlt(backHdc, posX, posY, Width, Height, mHmemDc, x, y, imgX, imgY, mDwColor);
 	}
 }
-void Image::RenderImage(HDC backHdc, RECT rendRect, RECT cutRect)
+void Image::RenderImage(HDC backHdc, int x, int y, int width, int height, RECT cutRect)
 {
 	if(mDwColor == -1)
 	{
-		BitBlt(backHdc, rendRect.left, rendRect.top, rendRect.right, rendRect.bottom, mHmemDc, 0, 0, SRCCOPY);
+		BitBlt(backHdc, x, y, width, height, mHmemDc, 0, 0, SRCCOPY);
 	}
 	else
 	{
@@ -90,7 +90,7 @@ void Image::RenderImage(HDC backHdc, RECT rendRect, RECT cutRect)
 
 		*/
 		//TransparentBlt(backHdc, x, y, rendX, rendY, mHmemDc, 0, 0, width, height, mDwColor);
-		TransparentBlt(backHdc, rendRect.left, rendRect.top, rendRect.right, rendRect.bottom, mHmemDc, cutRect.left, cutRect.top, cutRect.right, cutRect.bottom, mDwColor);
+		TransparentBlt(backHdc, x, y, width, height, mHmemDc, cutRect.left, cutRect.top, cutRect.right, cutRect.bottom, mDwColor);
 	}
 }
 
