@@ -2,30 +2,16 @@
 
 MapManager::MapManager()
 {
-	arrMap.assign(arrSizeX, vector<Map>(arrSizeY));
+	TileMap.assign(TILECOUNTX, vector<Map>(TILECOUNTY));
 
-	for (int x = 0; x < arrSizeX; x++)
+	for(int x = 1; x < TILECOUNTX - 1; x++)
 	{
-		for (int y = 0; y < arrSizeY; y++)
+		for(int y = 5; y < TILECOUNTY - 5; y++)
 		{
-			arrMap[x][y].Init(MapSize * y, MapSize * x, MapSize, MapSize,/**/ 52, 49, 16, 16, IMAGETYPE::IT_OBJECT);
+			TileMap[x][y].Init(TILESIZE * y, TILESIZE * x, TILESIZE, TILESIZE,/**/ 52, 49, 16, 16, IMAGETYPE::IT_OBJECT);
 		}
 	}
-
-//if(y > 6 && y < 20 && x > 2 && x < 12)
-//{
-//	arrMap[x][y].Init(MapSize * y, MapSize * x, MapSize, MapSize,/**/ 35, 49, 16, 16, IMAGETYPE::IT_OBJECT);
-//}
-//else
-//{
-//}
-	//for(int i = 3; i < 13; i++)
-	//{
-	//	for(int j = 7; j < 21; j++)
-	//	{
-	//		arrMap[i][j].Init(MapSize * y, MapSize * x, MapSize, MapSize,/**/ 52, 49, 16, 16, IMAGETYPE::IT_OBJECT);
-	//	}
-	//}
+	MapSetting();
 }
 
 MapManager::~MapManager()
@@ -33,22 +19,109 @@ MapManager::~MapManager()
 }
 Map MapManager::GetIdx(int x, int y)
 {
-	return arrMap[x][y];
+	return TileMap[x][y];
 }
+
 bool MapManager::IsMove(int x, int y)
 {
-	return arrMap[x][y].GetIsMove();
+	return TileMap[x][y].GetIsMove();
 }
+
+void MapManager::SetMove(int x, int y, bool bMove)
+{
+	return TileMap[x][y].SetIsMove(bMove);
+}
+
 void MapManager::Render(HDC backDC)
 {
-	//int temp = SetROP2(backDC, R2_MASKPEN);
-	for(int x = 0; x < arrSizeX; x++)
+	for(int x = 1; x < TILECOUNTX - 1; x++)
 	{
-		for(int y = 0; y < arrSizeY; y++)
+		for(int y = 5; y < TILECOUNTY - 5; y++)
 		{
-			arrMap[x][y].Render(backDC);
-			//Rectangle(backDC, arrMap[x][y].GetPosX(), arrMap[x][y].GetPosY(), arrMap[x][y].GetPosX() + MapSize, arrMap[x][y].GetPosY() + MapSize);
+			TileMap[x][y].Render(backDC);
 		}
 	}
-	//SetROP2(backDC, temp);
+}
+
+void MapManager::MapSetting()
+{
+	for(int y = 1; y < 14; y++)
+	{
+		TileMap[y][5].ImageChange(35, 49);
+		TileMap[y][5].SetIsMove(false);
+
+		TileMap[y][21].ImageChange(35, 49);
+		TileMap[y][21].SetIsMove(false);
+	}
+
+	for(int x = 6; x < 21; x++)
+	{
+		TileMap[1][x].ImageChange(35, 49);
+		TileMap[1][x].SetIsMove(false);
+
+		TileMap[13][x].ImageChange(35, 49);
+		TileMap[13][x].SetIsMove(false);
+	}
+
+	for(int y = 3; y < 13; y += 2)
+	{
+		for(int x = 7; x < 21; x += 2)
+		{
+			TileMap[y][x].ImageChange(35, 32);
+			TileMap[y][x].SetIsMove(false);
+
+			TileMap[y + 1][x].ImageChange(52, 32);
+		}
+	}
+}
+
+bool MapManager::IsCollision(int x, int y, ACTORDIRECTION pDir)
+{
+	int MoveLTgap = 30;
+	int MoveRBgap = 30;
+
+	switch(pDir)
+	{
+		case ACTORDIRECTION::AD_UP:
+		{
+			rect.left = (x + MoveLTgap) / TILESIZE;
+			rect.top = y / TILESIZE;
+
+			rect.right = (x + MoveRBgap) / TILESIZE;
+			rect.bottom = y / TILESIZE;
+			return !(TileMap[rect.top][rect.left].GetIsMove() && TileMap[rect.bottom][rect.right].GetIsMove());
+		}
+		case ACTORDIRECTION::AD_DOWN:
+		{
+			rect.left = (x + MoveLTgap) / TILESIZE;
+			rect.top = (y + TILESIZE - PLAYERSPEED) / TILESIZE;
+
+			rect.right = (x + MoveRBgap) / TILESIZE;
+			rect.bottom = (y + TILESIZE - PLAYERSPEED) / TILESIZE;
+			return !(TileMap[rect.top][rect.left].GetIsMove() && TileMap[rect.bottom][rect.right].GetIsMove());
+		}
+		case ACTORDIRECTION::AD_LEFT:
+		{
+			rect.left = x / TILESIZE;
+			rect.top = (y + MoveLTgap) / TILESIZE;
+
+			rect.right = x / TILESIZE;
+			rect.bottom = (y + MoveRBgap) / TILESIZE;
+			return !(TileMap[rect.top][rect.left].GetIsMove() && TileMap[rect.bottom][rect.right].GetIsMove());
+		}
+		case ACTORDIRECTION::AD_RIGHT:
+		{
+			rect.left = (x + TILESIZE - PLAYERSPEED) / TILESIZE;
+			rect.top = (y + MoveLTgap) / TILESIZE;
+
+			rect.right = (x + TILESIZE - PLAYERSPEED) / TILESIZE;
+			rect.bottom = (y + MoveRBgap) / TILESIZE;
+			return !(TileMap[rect.top][rect.left].GetIsMove() && TileMap[rect.bottom][rect.right].GetIsMove());
+		}
+		default:
+		{
+			break;
+		}
+	}
+	return true;
 }

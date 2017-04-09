@@ -4,8 +4,8 @@
 
 BaseTransform::BaseTransform()
 {
-	mfPosX = 0;
-	mfPosY = 0;
+	miPosX = 0;
+	miPosY = 0;
 	miWidth = 0;
 	miHeight = 0;
 	mCutRect.left = 0;

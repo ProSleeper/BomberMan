@@ -57,59 +57,49 @@ if(value)\
 	if((GetAsyncKeyState(key) & 0x8001) == 0x0000)\
 	{func();value = false;}\
 }
-
 enum class OBJECTTAG
 {
 	TAG_NONE,
+	TAG_BOX,
 	TAG_PLAYER,
-	TAG_PLAYER_BULLET,
 	TAG_ENEMY,
-	TAG_ENEMY_BULLET,
+	TAG_BOMB,
+	TAG_EXPLOSION,
 	TAG_BOSS,
 	TAG_MAX
-};
-
-enum class VECTORBULLET
-{
-	VB_NORTH,
-	VB_SOUTH,
-	VB_EAST,
-	VB_WEST
 };
 
 enum class IMAGETYPE
 {
 	IT_BACK = 0,
+	IT_BACKGROUND,
 	IT_OBJECT,
 	IT_PLAYER,
 	IT_ENEMY,
-	IT_WALL,
-	IT_BOMB,
-	IT_EXPLOSION,
-	IT_SPRITE,
 	IT_MAX
 };
 
-enum class PLAYERDIRECTION
+enum class ACTORDIRECTION
 {
-	PM_UP = 0,
-	PM_DOWN,
-	PM_LEFT,
-	PM_RIGHT
+	AD_UP = 0,
+	AD_DOWN,
+	AD_LEFT,
+	AD_RIGHT
 };
 
 #include "SingleTon.cpp"
 #include "WindowManager.h"
 #include "Image.h"
 #include "ImageManager.h"
+#include "Time.h"
 #include "BaseTransform.h"
 #include "BaseImageObject.h"
 #include "BaseTargetObject.h"
 #include "BaseCollObject.h"
-#include "Time.h"
+
 #include "CollisionManager.h"
 #include "Map.h"
-#include "Enemy.h"
+
 #include "Object.h"
 #include "EnemyManager.h"
 
@@ -117,6 +107,7 @@ enum class PLAYERDIRECTION
 #include "EffectManager.h"
 #include "Bomb.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Wall.h"
 #include "Box.h"
 #include "GameManager.h"
@@ -132,11 +123,13 @@ enum class PLAYERDIRECTION
 #include "Actor.h"
 
 
-const int ScreenSizeX = 1600;
-const int ScreenSizeY = 900;
+const int SCREENSIZEX = 1600;
+const int SCREENSIZEY = 900;
 
-const int arrSizeX = 15;
-const int arrSizeY = 27;
-const int MapSize = 60;
+const int TILECOUNTX = 15;
+const int TILECOUNTY = 27;
+const int TILESIZE = 60;
+const int HALFTILESIZE = 30;
 
-const int PlayerSpeed = 3;
+const int PLAYERSPEED = 3;
+const int MONSTERSPEED = 3;

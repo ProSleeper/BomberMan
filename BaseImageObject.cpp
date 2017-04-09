@@ -5,8 +5,8 @@ void BaseImageObject::Init(int rendX, int rendY, int rendWidth, int rendHeight, 
 {
 	mpImage = IMAGEMGR->GetImage(type);
 
-	mfPosX = rendX;
-	mfPosY = rendY;
+	miPosX = rendX;
+	miPosY = rendY;
 	miWidth = rendWidth;
 	miHeight = rendHeight;
 
@@ -20,8 +20,8 @@ void BaseImageObject::Init(int x, int y, int w, int h, IMAGETYPE type)
 {
 	mpImage = IMAGEMGR->GetImage(type);
 
-	mfPosX = x;
-	mfPosY = y;
+	miPosX = x;
+	miPosY = y;
 	miWidth = w;
 	miHeight = h;
 }
@@ -30,8 +30,8 @@ void BaseImageObject::Init(int x, int y, IMAGETYPE type)
 {
 	mpImage = IMAGEMGR->GetImage(type);
 
-	mfPosX = x;
-	mfPosY = y;
+	miPosX = x;
+	miPosY = y;
 	miWidth = mpImage->GetWidth();
 	miHeight = mpImage->GetHeight();
 
@@ -39,13 +39,13 @@ void BaseImageObject::Init(int x, int y, IMAGETYPE type)
 
 void BaseImageObject::Render(HDC backDC)
 {
-	mpImage->RenderImage(backDC, mfPosX, mfPosY, miWidth, miHeight, mCutRect);
+	mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, mCutRect);
 }
 
 void BaseImageObject::Render(HDC backDC, Image* pBack, int w)
 {
-	pBack->RenderImage(backDC, mfPosX, mfPosY);
-	mpImage->RenderImage(backDC, mfPosX, mfPosY, w);
+	pBack->RenderImage(backDC, miPosX, miPosY);
+	mpImage->RenderImage(backDC, miPosX, miPosY, w);
 }
 
 void BaseImageObject::ImageChange(int x, int y)
@@ -59,6 +59,7 @@ BaseImageObject::BaseImageObject()
 	mpImage = nullptr;
 	mbCollider = false;
 	isMove = true;
+	mIsLife = true;
 }
 
 

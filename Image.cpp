@@ -48,11 +48,11 @@ void Image::RenderImage(HDC backHdc, int x, int y)
 
 void Image::RenderImage(HDC backHdc, int posX, int posY, int Width, int Height, int x, int y, int imgX, int imgY)
 {
-	if(mDwColor == -1)
+	/*if(mDwColor == -1)
 	{
 		BitBlt(backHdc, x, y, miWidth, miHeight, mHmemDc, imgX, imgY, SRCCOPY);
 	}
-	else
+	else*/
 	{
 		TransparentBlt(backHdc, posX, posY, Width, Height, mHmemDc, x, y, imgX, imgY, mDwColor);
 	}
@@ -135,7 +135,7 @@ Image::Image()
 	miHeight = 0;
 	mfSpeed = 1.0f;
 
-	mDwColor = 0;
+	mDwColor = -1;
 }
 
 Image::~Image()

@@ -5,7 +5,12 @@ public:
 	
 	Map GetIdx(int x, int y);
 	bool IsMove(int x, int y);
+	void SetMove(int x, int y, bool bMove);
+	
 	void Render(HDC backDC);
+	bool IsCollision(int x, int y, ACTORDIRECTION pDir);
+	void MapSetting();
+
 
 	MapManager();
 	virtual ~MapManager();
@@ -14,7 +19,7 @@ public:
 
 private:
 	
-
+	RECT rect;
 	//Map arrMap[arrSizeX][arrSizeY];
-	vector<vector<Map>> arrMap;
+	vector<vector<Map>> TileMap;
 };

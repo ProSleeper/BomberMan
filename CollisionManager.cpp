@@ -4,142 +4,87 @@
 
 void CollisionManager::CreateCollider(BaseTransform * pTarget)
 {
-	BaseCollObject* pCollObj = new BaseCollObject;
-	pCollObj->Init(pTarget);
-	mCollObj.push_back(pCollObj);
+	int x = pTarget->GetPosY() / TILESIZE;
+	int y = pTarget->GetPosX() / TILESIZE;/*
+	if(mObjectVector[x][y] != nullptr && mObjectVector[x][y]->GetTag() != OBJECTTAG::TAG_BOMB)
+	{
+		delete mObjectVector[x][y];
+	}*/
+	mObjectVector[x][y] = pTarget;
 }
 
 void CollisionManager::Update()
 {
-	for_each(mCollObj.begin(), mCollObj.end(), [](BaseCollObject* bco){bco->Update(); });
-
-	for(auto iter = mCollObj.begin(); iter != mCollObj.end(); iter++)
+	//for_each(mListObject.begin(), mListObject.end(), [](BaseImageObject* btf){btf->Update(); });
+	for(int x = 0; x < TILECOUNTX; x++)
 	{
-		auto nextIter = iter;
-		nextIter++;
-
-		for(nextIter; nextIter != mCollObj.end(); nextIter++)
+		for(int y = 0; y < TILECOUNTY; y++)
 		{
-
-			//이 부분을 나한테 맞게 바꿔야할듯
-			if (IsCollision((*iter), (*nextIter)) && GetCollTag((*iter)->GetTarget()->GetTag(), (*nextIter)->GetTarget()->GetTag()))
+			if(mObjectVector[x][y] != nullptr)
 			{
-				//충돌처리
-				/*BaseImageObject* pSrc = (BaseImageObject*)(*iter)->GetTarget();
-				BaseImageObject* pDest = (BaseImageObject*)(*nextIter)->GetTarget();*/
+				//bool update = mObjectVector[x][y]->Update();
 
-				BaseImageObject* pSrc = dynamic_cast<BaseImageObject*>((*iter)->GetTarget());
-				BaseImageObject* pDest = dynamic_cast<BaseImageObject*>((*nextIter)->GetTarget());
-				pSrc->OnCollisionEnter(pDest);
-				pDest->OnCollisionEnter(pSrc);
+				/*if((!update) && mObjectVector[x][y]->GetTag() == OBJECTTAG::TAG_BOMB)
+				{
+					Explosion * explosion = new Explosion;
+					explosion->Init(mObjectVector[x][y]->GetPosX(), mObjectVector[x][y]->GetPosY(), TILESIZE, TILESIZE, 0, 0, 0);
+					delete mObjectVector[x][y];
+					mObjectVector[x][y] = explosion;
+				}
+				else if(!update)
+				{
+					delete mObjectVector[x][y];
+					mObjectVector[x][y] = nullptr;
+				}*/
 			}
+			/*bool update = mListObject[x][y]->Update();
+
+			if((!update) && mListObject[x][y]->GetTag() == OBJECTTAG::TAG_BOMB)
+			{
+			Explosion * explosion = new Explosion;
+			explosion->Init(mListObject[x][y]->GetPosX(), mListObject[x][y]->GetPosY(), TileSize, TileSize, 0, 0, 0);
+			delete mListObject[x][y];
+			mListObject[x][y] = explosion;
+			}
+			else if((!update))
+			{
+			delete mListObject[x][y];
+			mListObject[x][y] = mBackObject[x][y];
+			mBackObject[x][y] = nullptr;
+			}*/
+
 		}
-
 	}
-
 }
 
 void CollisionManager::Render(HDC backDC)
 {
-	for_each(mCollObj.begin(), mCollObj.end(), [&](BaseCollObject* bco){bco->Render(backDC); });
+	/*for(int x = 1; x < TILECOUNTX - 1; x++)
+	{
+		for(int y = 5; y < TILECOUNTY - 5; y++)
+		{
+			if(mObjectVector[x][y] != nullptr)
+			{
+				mObjectVector[x][y]->Render(backDC);
+			}
+		}
+	}*/
 }
 
 void CollisionManager::Release()
 {
-	for_each(mCollObj.begin(), mCollObj.end(), [&](BaseCollObject* bco){delete bco; });
-	mCollObj.clear();
+	
 }
 
 void CollisionManager::DeleteCollider(BaseTransform * pTarget)
 {
-	for(auto iter = mCollObj.begin(); iter != mCollObj.end();)
-	{
-		if((*iter)->GetTarget() == pTarget)
-		{
-			delete (*iter);
-			iter = mCollObj.erase(iter);
-		}
-		else
-		{
-			iter++;
-		}
-	}
-}
 
-bool CollisionManager::IsCollision(BaseCollObject * pSrc, BaseCollObject * pDest)
-{
-	if ((pSrc->GetPosX() + pSrc->GetWidth()) < pDest->GetPosX())
-	{
-		return false;
-	}
 
-	if ((pDest->GetPosX() + pDest->GetWidth()) < pSrc->GetPosX())
-	{
-		return false;
-	}
-
-	if((pDest->GetPosY() + pDest->GetHeight()) < pSrc->GetPosY())
-	{
-		return false;
-	}
-
-	if((pSrc->GetPosY() + pSrc->GetHeight()) < pDest->GetPosY())
-	{
-		return false;
-	}
-
-	return true;
-}
-
-bool CollisionManager::GetCollTag(OBJECTTAG pSrc, OBJECTTAG pTarget)
-{
-	return collTag[static_cast<int>(pSrc)][static_cast<int>(pTarget)];
-}
-
-void CollisionManager::SetCollTag(OBJECTTAG pSrc, OBJECTTAG pTarget, bool value, bool setBoth)
-{
-	collTag[static_cast<int>(pSrc)][static_cast<int>(pTarget)] = value;
-	if (setBoth)
-	{
-		collTag[static_cast<int>(pTarget)][static_cast<int>(pSrc)] = value;
-	}
-}
-
-bool CollisionManager::RePosCheck(BaseTransform* pTarget)
-{
-	if (pTarget->GetPosX() > ScreenSizeX - pTarget->GetWidth())
-	{
-		return false;
-	}
-	
-	for(auto iter = mCollObj.begin(); iter != mCollObj.end(); iter++)
-	{
-		BaseCollObject* pObj = (BaseCollObject*)pTarget;
-		if (IsCollision(pObj, (*iter)) == true)
-		{
-			return false;
-		}
-	}
-	return true;
 }
 
 CollisionManager::CollisionManager()
 {
-	mCollObj.clear();
-	for(int i = 0; i < static_cast<int>(OBJECTTAG::TAG_MAX); i++)
-	{
-		for(int j = 0; j < static_cast<int>(OBJECTTAG::TAG_MAX); j++)
-		{
-			collTag[i][j] = true;
-		}
-	}
-
-	SetCollTag(OBJECTTAG::TAG_PLAYER, OBJECTTAG::TAG_PLAYER_BULLET, false);
-	SetCollTag(OBJECTTAG::TAG_ENEMY, OBJECTTAG::TAG_ENEMY, false);
-	SetCollTag(OBJECTTAG::TAG_PLAYER_BULLET, OBJECTTAG::TAG_PLAYER_BULLET, false);
-	SetCollTag(OBJECTTAG::TAG_ENEMY, OBJECTTAG::TAG_ENEMY_BULLET, false);
-	SetCollTag(OBJECTTAG::TAG_BOSS, OBJECTTAG::TAG_ENEMY_BULLET, false);
-	//SetCollTag(OBJECTTAG::TAG_PLAYER, OBJECTTAG::TAG_ENEMY_BULLET, false, false);
+	mObjectVector.assign(TILECOUNTX, vector<BaseTransform*>(TILECOUNTY));
 }
 
 

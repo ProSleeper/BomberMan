@@ -9,7 +9,7 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
 {
-	WINMGR->CreateWindowManager(hInstance, ScreenSizeX, ScreenSizeY, "BomBerMan!");
+	WINMGR->CreateWindowManager(hInstance, SCREENSIZEX, SCREENSIZEY, "BomBerMan!");
 
 	GAMEMGR->Init();
 

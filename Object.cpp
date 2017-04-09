@@ -4,7 +4,7 @@
 
 Object::Object()
 {
-	
+	mTag = OBJECTTAG::TAG_NONE;
 }
 
 

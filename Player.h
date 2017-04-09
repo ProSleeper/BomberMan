@@ -8,21 +8,15 @@ public:
 	bool Update();
 	void Render(HDC backDC);
 	void Release();
+	void DropBomb();
 
-	void MoveCheck(int pos, PLAYERDIRECTION pm);
+	void MoveCheck(int pos, ACTORDIRECTION pm);
 	void Player::RectColl(RECT& rect, int x, int y, int w, int h);
 
-	PROPERTY_FUNC(POINT, pPos, mPos)
-	PROPERTY_FUNC(int, Width, miWidth)
-	PROPERTY_FUNC(int, Height, miHeight)
-
-	Player(IMAGETYPE type);
+	Player();
 	virtual ~Player();
 private:
 	HDC mHmemDC;
-	POINT mPos;
-	int miWidth;
-	int miHeight;
 	int useSizeX;
 	int useSizeY;
 	int startX;
@@ -41,9 +35,6 @@ private:
 	bool mbDown;
 	bool mbLeft;
 	bool mbRight;
-
-	int arrX;
-	int arrY;
 
 };
 

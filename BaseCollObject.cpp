@@ -9,8 +9,8 @@ void BaseCollObject::Init(BaseTransform * pTarget)
 
 void BaseCollObject::Update()
 {
-	mfPosX = mpTarget->GetPosX();
-	mfPosY = mpTarget->GetPosY();
+	miPosX = mpTarget->GetPosX();
+	miPosY = mpTarget->GetPosY();
 
 	miWidth = mpTarget->GetWidth();
 	miHeight = mpTarget->GetHeight();
@@ -20,7 +20,7 @@ void BaseCollObject::Render(HDC backDC)
 {
 	//= GetROP2(backDC);
 	int temp = SetROP2(backDC, R2_MASKPEN);
-	Rectangle(backDC, mfPosX, mfPosY, mfPosX + miWidth, mfPosY + miHeight);
+	Rectangle(backDC, miPosX, miPosY, miPosX + miWidth, miPosY + miHeight);
 	SetROP2(backDC, temp);
 }
 

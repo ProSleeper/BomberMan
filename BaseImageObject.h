@@ -4,6 +4,7 @@ class BaseImageObject : public BaseTransform
 public:
 	PROPERTY_FUNC(Image*, Image, mpImage)
 	PROPERTY_FUNC(bool, IsMove, isMove)
+	PROPERTY_FUNC(bool, IsLife, mIsLife)
 
 	virtual void Init(int rendX, int rendY, int rendWidth, int rendHeight, int cutX, int cutY, int cutWidth, int cutHeight, IMAGETYPE type);
 	virtual void Init(int x, int y, int w, int h, IMAGETYPE type);
@@ -20,6 +21,8 @@ public:
 protected:
 	Image* mpImage;
 	bool isMove;
+	bool mIsLife;
+	Time mTime;
 	
 };
 

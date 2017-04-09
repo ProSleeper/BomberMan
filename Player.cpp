@@ -3,8 +3,8 @@
 
 void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float tTime)
 {
-	mPos.x = x;
-	mPos.y = y;
+	miPosX = x;
+	miPosY = y;
 	miWidth = w;
 	miHeight = h;
 
@@ -13,77 +13,89 @@ void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float 
 	mbLeft = true;
 	mbRight = true;
 
-	startX = 72;
+	startX = 71;
 	startY = 46;
+
 	this->useSizeX = useSizeX;
 	this->useSizeY = useSizeY;
-	bomb = new Bomb(IMAGETYPE::IT_OBJECT);
+	
 }
 
 bool Player::Update()
 {
 	if((GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000 && mbUp)
 	{
-		mPos.y -= PlayerSpeed;
-		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_UP))
+		miPosY -= PLAYERSPEED;
+		
+		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_UP))
 		{
-			mPos.y += PlayerSpeed;
+			miPosY += PLAYERSPEED;
 		}
 		else
 		{
-			mPos.x = ((mPos.x + 30)/ 60) * 60;
+			miPosX = ((miPosX + HALFTILESIZE)/ TILESIZE) * TILESIZE;
+			startX = 72;
+			startY = 20;
 		}
 	}
 	else if((GetAsyncKeyState(VK_DOWN) & 0x8000) == 0x8000 && mbDown)
 	{
-		mPos.y += PlayerSpeed;
-		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_DOWN))
+		miPosY += PLAYERSPEED;
+		
+		
+		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_DOWN))
 		{
-			mPos.y -= PlayerSpeed;
+			miPosY -= PLAYERSPEED;
 		}
 		else
 		{
-			mPos.x = ((mPos.x + 30) / 60) * 60;
+			miPosX = ((miPosX + HALFTILESIZE) / TILESIZE) * TILESIZE;
+			startX = 71;
+			startY = 46;
 		}
 	}
 	else if((GetAsyncKeyState(VK_LEFT) & 0x8000) == 0x8000 && mbLeft)
 	{
-		mPos.x -= PlayerSpeed;
-		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_LEFT))
+		miPosX -= PLAYERSPEED;
+		
+		
+		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_LEFT))
 		{
-			mPos.x += PlayerSpeed;
+			miPosX += PLAYERSPEED;
 		}
 		else
 		{
-			mPos.y = ((mPos.y + 30) / 60) * 60;
+			miPosY = ((miPosY + HALFTILESIZE) / TILESIZE) * TILESIZE;
+			startX = 2;
+			startY = 44;
 		}
 	}
 	else if((GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000 && mbRight)
 	{
-		mPos.x += PlayerSpeed;
-		if(OBJECTMGR->IsCollision(mPos.x, mPos.y, PLAYERDIRECTION::PM_RIGHT))
+		miPosX += PLAYERSPEED;
+		
+		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_RIGHT))
 		{
-			mPos.x -= PlayerSpeed;
+			miPosX -= PLAYERSPEED;
 		}
 		else
 		{
-			mPos.y = ((mPos.y + 30) / 60) * 60;
+			miPosY = ((miPosY + HALFTILESIZE) / TILESIZE) * TILESIZE;
+			startX = 106;
+			startY = 47;
 		}
 	}
-	GETKEYDOWN(VK_SPACE, mIsBomb, Release)
-
-	bomb->Update();
-
+	GETKEYDOWN(VK_SPACE, mIsBomb, DropBomb)
 
 	return true;
 }
 
 void Player::Render(HDC backDC)
 {
-	mpImage->RenderImage(backDC,mPos.x, mPos.y, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
+	mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
 	int temp = SetROP2(backDC, R2_MASKPEN);
-	Rectangle(backDC, mPos.x, mPos.y, mPos.x + 60, mPos.y + 60);
-	
+	Rectangle(backDC, miPosX, miPosY, miPosX + TILESIZE, miPosY + TILESIZE);
+
 	SetROP2(backDC, temp);
 
 	
@@ -94,45 +106,53 @@ void Player::Render(HDC backDC)
 
 	//MAPMGR->
 
-	if (IsBomb)
+	/*if (IsBomb)
 	{
 		bomb->Render(backDC);
-	}
+	}*/
 }
 
 void Player::Release()
+{
+
+}
+
+void Player::DropBomb()
 {       
 	int CenterX = 0;
 	int CenterY = 0;
-	if (mPos.x % 60 >= 35)
+	if (miPosX % TILESIZE >= HALFTILESIZE)
 	{
-		CenterX = ((mPos.x / 60) * 60) + 60;
+		CenterX = ((miPosX / TILESIZE) * TILESIZE) + TILESIZE;
 	}
 	else
 	{
-		CenterX = (mPos.x / 60) * 60;
+		CenterX = (miPosX / TILESIZE) * TILESIZE;
 	}
 
-	if((mPos.y) % 60 >= 35)
+	if((miPosY) % TILESIZE >= HALFTILESIZE)
 	{
-		CenterY = (((mPos.y) / 60) * 60) + 60;
+		CenterY = (((miPosY) / TILESIZE) * TILESIZE) + TILESIZE;
 	}
 	else
 	{
-		CenterY = ((mPos.y) / 60) * 60;
+		CenterY = ((miPosY) / TILESIZE) * TILESIZE;
 	}
-
-	bomb->Init(CenterX, CenterY, 60, 60,/**/ 67, 16, 1);
+	bomb = new Bomb;
+	bomb->Init(CenterX, CenterY, TILESIZE, TILESIZE,/**/ 67, 16, 1);
+	OBJECTMGR->CreateObject(bomb);
+	//COLLMGR->CreateCollider(bomb);
 	IsBomb = true;
 }
 
-Player::Player(IMAGETYPE type)
+Player::Player()
 {
-	mpImage = IMAGEMGR->GetImage(type);
-	mPos.x = 0;
-	mPos.y = 0;
+	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_PLAYER);
+	miPosX = 0;
+	miPosY = 0;
 	miWidth = 0;
 	miHeight = 0;
+	mTag = OBJECTTAG::TAG_PLAYER;
 }
 
 Player::~Player()
@@ -156,14 +176,14 @@ Player::~Player()
 //		rhs += (60 - temp);
 //	}
 //}
-void Player::MoveCheck(int pos, PLAYERDIRECTION pm)
+void Player::MoveCheck(int pos, ACTORDIRECTION pm)
 {
 }
 
 void Player::RectColl(RECT& rect, int x, int y, int w, int h)
 {
-	rect.left = mPos.x + x;
-	rect.top = mPos.y + y;
-	rect.right = mPos.x + w;
-	rect.bottom = mPos.y + h;
+	rect.left = miPosX + x;
+	rect.top = miPosY + y;
+	rect.right = miPosX + w;
+	rect.bottom = miPosY + h;
 }

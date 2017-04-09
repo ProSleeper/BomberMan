@@ -8,19 +8,12 @@ public:
 	void Release();
 
 	void DeleteCollider(BaseTransform* pTarget);
-	bool IsCollision(BaseCollObject* pSrc, BaseCollObject* pDest);
-	bool GetCollTag(OBJECTTAG pSrc, OBJECTTAG pTarget);
-	void SetCollTag(OBJECTTAG pSrc, OBJECTTAG pTarget, bool value, bool setBoth = true);
 
-	bool RePosCheck(BaseTransform* pTarget);
-
-	PROPERTYARRAY_FUNC(vector<BaseCollObject*>*, Collider, &mCollObj)
 	CollisionManager();
 	virtual ~CollisionManager();
 private:
-	vector<BaseCollObject*> mCollObj;
-	bool collTag[static_cast<int>(OBJECTTAG::TAG_MAX)][static_cast<int>(OBJECTTAG::TAG_MAX)] = {0,};
-
+	vector<vector<BaseTransform*>> mObjectVector;
+	RECT rect;
 
 };
 

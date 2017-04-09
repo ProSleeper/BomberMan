@@ -30,15 +30,15 @@ void EnemyManager::CreateEnemy(int x, int y, BaseImageObject* pObj, bool coll)
 	miTotalEnemyCount++;
 	while (true)
 	{
-		if (COLLMGR->RePosCheck(pObj))
+		/*if (COLLMGR->RePosCheck(pObj))
 		{
 			break;
 		}
 		else
 		{
-			int rndX = rand() % ScreenSizeX;
+			int rndX = rand() % SCREENSIZEX;
 			pObj->SetPosX(static_cast<float>(rndX));
-		}
+		}*/
 	}
 
 	GAMEMGR->CreateObject(pObj, coll);

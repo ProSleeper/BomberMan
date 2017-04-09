@@ -1,141 +1,118 @@
 #include "GameCommon.h"
 
 
-
 void ObjectManager::Init()
 {
-
+	for(int y = 4; y < 12; y += 2)
+	{
+		for(int x = 7; x < 21; x += 2)
+		{
+			box = new Box;
+			box->Init(x * TILESIZE, y * TILESIZE, 60, 60, 60, 60, 1);
+			CreateObject(box);
+			MAPMGR->SetMove(y, x, false);
+		}
+	}
 }
 
 void ObjectManager::Update()
 {
-	//for_each(mListObject.begin(), mListObject.end(), [](BaseImageObject* btf){btf->Update(); });
+	//for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Update(); });
+	
+	for (auto iter = mObjectList.begin(); iter != mObjectList.end();)
+	{
+
+		if ((*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
+		{
+			if (!(GAMEMGR->IsCrashObject((*iter), mObjectList.back())))
+			{
+				MAPMGR->SetMove((*iter)->GetPosY() / TILESIZE, (*iter)->GetPosX() / TILESIZE, false);
+			}
+		}
+		else if((*iter)->GetTag() == OBJECTTAG::TAG_EXPLOSION)
+		{
+			if(GAMEMGR->IsCrashObject((*iter), mObjectList.back()))
+			{
+				mObjectList.back()->SetPosX(360);
+				mObjectList.back()->SetPosY(120);
+			}
+		}
+
+		if ((*iter)->Update() == false)
+		{
+			delete (*iter);
+			iter = mObjectList.erase(iter);
+		}
+		else
+		{
+			iter++;
+		}
+		
+	}
 }
 
 void ObjectManager::Render(HDC backDC)
 {
-	//for_each(mListObject.begin(), mListObject.end(), [&](BaseImageObject* btf){btf->Render(backDC); });
-	for(int x = 1; x < arrSizeX - 1; x++)
-	{
-		for(int y = 5; y < arrSizeY - 5; y++)
-		{
-			mListObject[x][y]->Render(backDC);
-		}
-	}
+	for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Render(backDC); });
 }
 
 void ObjectManager::Release()
 {
 }
 
-bool ObjectManager::IsCollision(int x, int y, PLAYERDIRECTION pDir)
+bool ObjectManager::DistanceExplode(int x, int y)
 {
-	int MoveLTgap = 15;
-	int MoveRBgap = 45;
-
-
-	switch (pDir)
-	{
-		case PLAYERDIRECTION::PM_UP:
-		{
-			rect.left = (x + MoveLTgap) / MapSize;
-			rect.top = y / MapSize;
-
-			rect.right = (x + MoveRBgap) / MapSize;
-			rect.bottom = y / MapSize;
-			return !(mListObject[rect.top][rect.left]->GetIsMove() && mListObject[rect.bottom][rect.right]->GetIsMove());
-		}
-		case PLAYERDIRECTION::PM_DOWN:
-		{
-			rect.left = (x + MoveLTgap) / MapSize;
-			rect.top = (y + MapSize - PlayerSpeed) / MapSize;
-
-			rect.right = (x + MoveRBgap) / MapSize;
-			rect.bottom = (y + MapSize - PlayerSpeed) / MapSize;
-			return !(mListObject[rect.top][rect.left]->GetIsMove() && mListObject[rect.bottom][rect.right]->GetIsMove());
-		}
-		case PLAYERDIRECTION::PM_LEFT:
-		{
-			rect.left = x / MapSize;
-			rect.top = (y + MoveLTgap) / MapSize;
-
-			rect.right = x / MapSize;
-			rect.bottom = (y + MoveRBgap) / MapSize;
-			return !(mListObject[rect.top][rect.left]->GetIsMove() && mListObject[rect.bottom][rect.right]->GetIsMove());
-		}
-		case PLAYERDIRECTION::PM_RIGHT:
-		{
-			rect.left = (x + MapSize - PlayerSpeed) / MapSize;
-			rect.top = (y + MoveLTgap) / MapSize;
-
-			rect.right = (x + MapSize - PlayerSpeed) / MapSize;
-			rect.bottom = (y + MoveRBgap) / MapSize;
-			return !(mListObject[rect.top][rect.left]->GetIsMove() && mListObject[rect.bottom][rect.right]->GetIsMove());
-		}
-		default:
-		{
-			break;
-		}
-	}
-	return true;
+	return false;
 }
 
 void ObjectManager::CreateObject(BaseImageObject* pObj)
 {
-	//mListObject.push_back(pObj);
-}
 
-void ObjectManager::ChangeObject(int x, int y, int w, int h, bool bMove)
-{
-	mListObject[x][y]->ImageChange(w, h);
-	mListObject[x][y]->SetIsMove(bMove);
-}
+	if (pObj->GetTag() == OBJECTTAG::TAG_EXPLOSION)
+	{
+		for(auto iter = mObjectList.begin(); iter != mObjectList.end();)
+		{
+			if((pObj->GetPosX() / TILESIZE) == ((*iter)->GetPosX() / TILESIZE)
+			   && (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE) && (*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
+			{
+				Bomb* temp = dynamic_cast<Bomb*>(*iter);
 
-bool ObjectManager::IsMove(int x, int y)
-{
-	return mListObject[x][y]->GetIsMove();
-}
+				temp->TimeBomb();
+				iter++;
+			}
+			else if((pObj->GetPosX() / TILESIZE) == ((*iter)->GetPosX() / TILESIZE)
+					&& (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE) && (*iter)->GetTag() == OBJECTTAG::TAG_BOX)
+			{
+				Box* temp = dynamic_cast<Box*>(*iter);
 
-RECT ObjectManager::GetRECT(int x, int y)
-{
-	Object* temp = dynamic_cast<Object*>(mListObject[x][y]);
+				temp->DestroyBox();
+				iter++;
+			}
+			else
+			{
+				iter++;
+			}
 
-	RECT rect;
-	rect.left = temp->GetPosX();
-	rect.top = temp->GetPosY();
-	rect.right = temp->GetPosX() + temp->GetWidth();
-	rect.bottom = temp->GetPosY() + temp->GetHeight();
+		}
+	}
+	
+	mObjectList.push_front(pObj);
 
-	return rect;
+	//COLLMGR->CreateCollider(pObj);
 }
 
 void ObjectManager::DeleteObject()
 {
-	//for(auto iter = mListObject.begin(); iter != mListObject.end();)
-	//{
-	//	if((*iter)->Update())
-	//	{
-	//		delete (*iter);
-	//		iter = mListObject.erase(iter);
-	//	}
-	//	else
-	//	{
-	//		iter++;
-	//	}
-	//}
+	
+}
+
+bool ObjectManager::GetTag(int x, int y)
+{
+	return false;
 }
 
 ObjectManager::ObjectManager()
 {
-	mListObject.assign(arrSizeX, vector<BaseImageObject*>(arrSizeY));
-	for(int x = 1; x < arrSizeX - 1; x++)
-	{
-		for(int y = 5; y < arrSizeY - 5; y++)
-		{
-			mListObject[x][y] = new Object;
-			mListObject[x][y]->Init(MapSize * y, MapSize * x, MapSize, MapSize,/**/ 52, 49, 16, 16, IMAGETYPE::IT_OBJECT);
-		}
-	}
 }
 
 ObjectManager::~ObjectManager()

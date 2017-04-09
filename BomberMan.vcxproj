@@ -156,6 +156,7 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="FrameCheckManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="FrameCheckManager.h" />
     <ClInclude Include="GameCommon.h" />

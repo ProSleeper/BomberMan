@@ -31,13 +31,13 @@
       <UniqueIdentifier>{66a94de3-4bcd-4209-9f24-f5c105ef469b}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Actor">
-      <UniqueIdentifier>{5587f47b-30e5-47c7-bba3-d613b59e7e07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Actor\cpp">
-      <UniqueIdentifier>{adfe9861-f5a2-41ce-a461-d128a622c4d0}</UniqueIdentifier>
+      <UniqueIdentifier>{27f38c81-7447-4650-a6ac-023c317ddbb4}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Actor\h">
       <UniqueIdentifier>{6d7ca5cd-4710-4a77-a197-e826decb2cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Actor\cpp">
+      <UniqueIdentifier>{adfe9861-f5a2-41ce-a461-d128a622c4d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +119,9 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>소스 파일\Library</Filter>
     </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>소스 파일\Object\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameCheckManager.h">
@@ -198,6 +201,9 @@
     </ClInclude>
     <ClInclude Include="BaseTargetObject.h">
       <Filter>소스 파일\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>소스 파일\Object\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

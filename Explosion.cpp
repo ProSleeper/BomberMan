@@ -1,53 +1,43 @@
 #include "GameCommon.h"
 
-
-void Explosion::Init(int x, int y, int w, int h, int tw, int th, int tTime, IMAGETYPE type)
+void Explosion::Init(int x, int y, int w, int h, int tw, int th, float tTime)
 {
-	mfPosX = x;
-	mfPosY = y;
+	miPosX = x;
+	miPosY = y;
 	miWidth = w;
 	miHeight = h;
+	mTag = OBJECTTAG::TAG_EXPLOSION;
+	mTime.SetUpTime(EXPLODETIME);
+}
 
-	miTotalWidth = tw;
-	miTotalHeight = th;
-	miTotalTime = tTime;
-
-	miFrameX = miTotalWidth / miWidth;
-	miFrameY = miTotalHeight / miHeight;
-	miTotalFrame = miFrameX * miFrameY;
-
-	miNextTime = ((float)miTotalTime / miTotalFrame) * 1000;
-	miOldTime = timeGetTime();
-	miCalTime = miNextTime;
+void Explosion::Init(int x, int y)
+{
+	miPosX = x;
+	miPosY = y;
+	miWidth = TILESIZE;
+	miHeight = TILESIZE;
+	mTag = OBJECTTAG::TAG_EXPLOSION;
+	mTime.SetUpTime(EXPLODETIME);
 }
 
 bool Explosion::Update()
 {
-	miCurTime = timeGetTime() - miOldTime;
-	if (miCurTime >= miCalTime)
+	if(mTime.TimeCheck())
 	{
-		miCalTime += miNextTime;
-		miCurFrame++;
-
-		if (miCurFrame >= miTotalFrame)
-		{
-			return false;
-		}
-
-		if(miFrameY > 1)
-		{
-			miCurFrame = miCurFrame / miFrameX;
-		}
-		miCurFrameX = miCurFrame % miFrameX;
+		//MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, true);
+		return false;
 	}
+	return true;
 }
+
 
 void Explosion::Render(HDC backDC)
 {
-	int x, y;
-	x = miCurFrameX * miWidth;
-	y = miCurFrameY * miHeight;
-	mpImage->RenderImage(backDC, mfPosX, mfPosY, x, y);
+	mpImage->RenderImage(backDC, miPosX, miPosY, TILESIZE, TILESIZE, 69, 100, 16, 16);
+	int temp = SetROP2(backDC, R2_MASKPEN);
+	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
+	SetROP2(backDC, temp);
+	//mpImage->RenderImage(backDC, mPos.x, mPos.y, miWidth, miHeight, x, y, miWidth, miHeight);
 }
 
 void Explosion::Release()
@@ -56,21 +46,11 @@ void Explosion::Release()
 
 Explosion::Explosion()
 {
-	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_EXPLOSION);
-	miTotalWidth = 0;
-	miTotalHeight = 0;
-	miTotalTime = 0;
-
-	miFrameX = 0;
-	miFrameY = 0;
-	miCurFrameX = 0;
-	miCurFrameY = 0;
-	miCurFrame = 0;
-	miTotalFrame = 0;
-	miNextTime = 0;
-	miCurTime = 0;
-	miOldTime = 0;
-	miCalTime = 0;
+	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_OBJECT);
+	miPosX = 0;
+	miPosY = 0;
+	miWidth = 0;
+	miHeight = 0;
 }
 
 Explosion::~Explosion()

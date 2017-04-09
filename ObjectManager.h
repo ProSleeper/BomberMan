@@ -2,23 +2,21 @@
 class ObjectManager : public SingleTon<ObjectManager>
 {
 public:
-
 	void Init();
 	void Update();
 	void Render(HDC backDC);
 	void Release();
-	bool IsCollision(int x, int y, PLAYERDIRECTION pDir);
+	bool DistanceExplode(int x, int y);
 
 	void CreateObject(BaseImageObject* pObj);
-	void ChangeObject(int x, int y, int w, int h, bool bMove = true);
 	void DeleteObject();
-	bool IsMove(int x, int y);
-	RECT GetRECT(int x, int y);
+	bool GetTag(int x, int y);
+
 	
 	ObjectManager();
 	virtual ~ObjectManager();
 private:
-	vector<vector<BaseImageObject*>> mListObject;
-	RECT rect;
+	list<BaseImageObject*> mObjectList;
+	Box * box;
 };
 
