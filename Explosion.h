@@ -17,6 +17,7 @@ private:
 	HDC mHmemDC;
 	Image* mpImage;
 	Time mTime;
+	Animation* mExplosionAnimation;
 
 	float EXPLODETIME = 0.5f;
 };

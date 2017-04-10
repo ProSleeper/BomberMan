@@ -10,7 +10,7 @@ void Box::Init(int x, int y, int w, int h, int tw, int th, float tTime)
 	mIsLife = true;
 	mTime.SetUpTime(0);
 	mBoxAnimation[0] = new Animation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOX);
-	mBoxAnimation[0]->Init(miPosX, miPosY, 69, 32, 16, 16, 68, 17, 0.1f, true, false);
+	mBoxAnimation[0]->Init(miPosX, miPosY, 69, 32, 16, 16, 68, 17, 0.1f);
 
 	mBox = mBoxAnimation[0];
 
@@ -60,7 +60,7 @@ void Box::DestroyBox()
 {
 	mTime.SetUpTime(0.6f);
 	mBoxAnimation[1] = new Animation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOX);
-	mBoxAnimation[1]->Init(miPosX, miPosY, 1, 151, 16, 16, 102, 17, 0.1f, true, false);
+	mBoxAnimation[1]->Init(miPosX, miPosY, 1, 151, 16, 16, 102, 17, 0.1f);
 	mBox = mBoxAnimation[1];
 	delete mBoxAnimation[0];
 	mIsLife = false;

@@ -17,10 +17,10 @@ void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float 
 	mDirection[3] = new LoopAnimation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
 
 
-	mDirection[0]->Init(miPosX, miPosY, 98, 1, 15, 24, 48, 16, 0.25f, false, true);
-	mDirection[1]->Init(miPosX, miPosY, 50, 1, 15, 24, 48, 16, 0.25f, false, true);
-	mDirection[2]->Init(miPosX, miPosY, 0, 1, 16, 24, 51, 17, 0.25f, false, true);
-	mDirection[3]->Init(miPosX, miPosY, 145, 1, 16, 24, 51, 17, 0.25f, false, true);
+	mDirection[0]->Init(miPosX, miPosY, 98, 1, 15, 24, 48, 16, 0.25f);
+	mDirection[1]->Init(miPosX, miPosY, 50, 1, 15, 24, 48, 16, 0.25f);
+	mDirection[2]->Init(miPosX, miPosY, 0, 1, 16, 24, 51, 17, 0.25f);
+	mDirection[3]->Init(miPosX, miPosY, 145, 1, 16, 24, 51, 17, 0.25f);
 
 	mPlayerAnimation = mDirection[1];
 

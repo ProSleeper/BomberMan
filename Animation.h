@@ -3,7 +3,7 @@ class Animation : public BaseImageObject
 {
 public:
 
-	void Init(int x, int y, int animX, int animY, int w, int h, int totalWidth, int useWidth, float frameTime, bool bMotion, bool bLoop);
+	virtual void Init(int x, int y, int MoveX, int MoveY, int w, int h, int totalWidth, int useWidth, float frameTime, bool bMotion = true);
 	virtual bool Update(int x, int y);
 	void Render(HDC backDC) override;
 	void Release();
@@ -23,8 +23,6 @@ protected:
 	float mAnimCurTime;
 	int FrameMove;
 	float FrameTime;
-
 	bool mbMotion;
-	bool mbLoop;
 };
 

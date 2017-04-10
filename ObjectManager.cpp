@@ -14,6 +14,8 @@ void ObjectManager::Init()
 		}
 	}
 }
+////애니메이션 효과 분명 메모리 버그 나게 되어있음
+//적까지 구현한 후 메모리 버그날만한 것들 다 잡기
 
 void ObjectManager::Update()
 {

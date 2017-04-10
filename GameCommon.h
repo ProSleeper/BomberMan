@@ -103,11 +103,12 @@ enum class ACTORDIRECTION
 #include "Object.h"
 #include "EnemyManager.h"
 
-#include "Explosion.h"
+
 #include "EffectManager.h"
 #include "Animation.h"
 #include "IndexAnimation.h"
 #include "LoopAnimation.h"
+#include "Explosion.h"
 #include "Bomb.h"
 
 #include "Player.h"

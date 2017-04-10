@@ -19,8 +19,8 @@ void Bomb::Init(int x, int y, int w, int h, int tw, int th, float tTime)
 
 	mTag = OBJECTTAG::TAG_BOMB;
 	mBombAnimation = new LoopAnimation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOMB);
-	mBombAnimation->Init(miPosX, miPosY, 103, 151, 16, 16, 51, 17, 0.3f, true, true);
-	DistanceExplode();
+	mBombAnimation->Init(miPosX, miPosY, 103, 151, 16, 16, 51, 17, 0.3f, true);
+	//DistanceExplode();
 	mTime.SetUpTime(2);
 }
 
@@ -29,35 +29,75 @@ bool Bomb::Update()
 	if (mTime.TimeCheck())
 	{
 		Explosion* explosion;
-		for (int y = 0; y <= mBombRect.top; y++)
+		explosion = new Explosion;
+		explosion->Init(miPosX, miPosY, 1, 117, 85, 17, 0.05f);
+		OBJECTMGR->CreateObject(explosion);
+		for (int y = 1; y <= mBombRect.top; y++)
 		{
+			if (y == mBombRect.top)
+			{
+				explosion = new Explosion;
+				explosion->Init(miPosX, miPosY - y * TILESIZE, 1, 202, 85, 17, 0.05f);
+				OBJECTMGR->CreateObject(explosion);
+				continue;
+			}
 			explosion = new Explosion;
-			explosion->Init(miPosX , miPosY - y * TILESIZE);
+			explosion->Init(miPosX , miPosY - y * TILESIZE , 1, 134, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
 			//MAPMGR->SetMove((miPosY - y * TILESIZE) / TILESIZE, miPosX / TILESIZE, false);
 		}
 		//아래
 		for(int y = 1; y <= mBombRect.bottom; y++)
 		{
+			if(y == mBombRect.bottom)
+			{
+				explosion = new Explosion;
+				explosion->Init(miPosX, miPosY + y * TILESIZE, 1, 185, 85, 17, 0.05f);
+				OBJECTMGR->CreateObject(explosion);
+				continue;
+			}
 			explosion = new Explosion;
-			explosion->Init(miPosX, miPosY + y * TILESIZE);
+			explosion->Init(miPosX, miPosY + y * TILESIZE, 1, 134, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
+			/*explosion = new Explosion;
+			explosion->Init(miPosX, miPosY + y * TILESIZE);
+			OBJECTMGR->CreateObject(explosion);*/
 			//MAPMGR->SetMove((miPosY + y * TILESIZE) / TILESIZE, miPosX / TILESIZE, false);
 		}
 		//왼쪽
 		for(int x = 1; x <= mBombRect.left; x++)
 		{
+			if(x == mBombRect.left)
+			{
+				explosion = new Explosion;
+				explosion->Init(miPosX - x * TILESIZE, miPosY, 1, 66, 85, 17, 0.05f);
+				OBJECTMGR->CreateObject(explosion);
+				continue;
+			}
 			explosion = new Explosion;
-			explosion->Init(miPosX - x * TILESIZE, miPosY);
+			explosion->Init(miPosX - x * TILESIZE, miPosY, 1, 100, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
+			/*explosion = new Explosion;
+			explosion->Init(miPosX - x * TILESIZE, miPosY);
+			OBJECTMGR->CreateObject(explosion);*/
 			//MAPMGR->SetMove(miPosY / TILESIZE, (miPosX - x * TILESIZE) / TILESIZE, false);
 		}
 		//오른쪽
 		for(int x = 1; x <= mBombRect.right; x++)
 		{
+			if(x == mBombRect.right)
+			{
+				explosion = new Explosion;
+				explosion->Init(miPosX + x * TILESIZE, miPosY, 1, 83, 85, 17, 0.05f);
+				OBJECTMGR->CreateObject(explosion);
+				continue;
+			}
 			explosion = new Explosion;
-			explosion->Init(miPosX + x * TILESIZE, miPosY);
+			explosion->Init(miPosX + x * TILESIZE, miPosY, 1, 100, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
+			/*explosion = new Explosion;
+			explosion->Init(miPosX + x * TILESIZE, miPosY);
+			OBJECTMGR->CreateObject(explosion);*/
 			//MAPMGR->SetMove(miPosY / TILESIZE, (miPosX + x * TILESIZE) / TILESIZE, false);
 		}
 		MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, true);

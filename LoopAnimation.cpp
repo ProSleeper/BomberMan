@@ -1,6 +1,12 @@
 #include "GameCommon.h"
 
 
+void LoopAnimation::Init(int x, int y, int MoveX, int MoveY, int w, int h, int totalWidth, int useWidth, float frameTime, bool bMotion)
+{
+	Animation::Init(x, y, MoveX, MoveY, w, h, totalWidth, useWidth, frameTime);
+	mbMotion = bMotion;
+}
+
 bool LoopAnimation::Update(int x, int y)
 {
 	miPosX = x;

@@ -1,13 +1,15 @@
 #include "GameCommon.h"
 
-void Explosion::Init(int x, int y, int w, int h, int tw, int th, float tTime)
+void Explosion::Init(int x, int y, int animX, int animY, int tw, int th, float tTime)
 {
 	miPosX = x;
 	miPosY = y;
-	miWidth = w;
-	miHeight = h;
+	miWidth = animX;
+	miHeight = animY;
 	mTag = OBJECTTAG::TAG_EXPLOSION;
 	mTime.SetUpTime(EXPLODETIME);
+	mExplosionAnimation = new LoopAnimation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_EXPLOSION);
+	mExplosionAnimation->Init(miPosX, miPosY, miWidth, miHeight, 16, 16, tw, th, tTime);
 }
 
 void Explosion::Init(int x, int y)
@@ -27,13 +29,15 @@ bool Explosion::Update()
 		//MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, true);
 		return false;
 	}
+	mExplosionAnimation->Update(miPosX, miPosY);
 	return true;
 }
 
 
 void Explosion::Render(HDC backDC)
 {
-	mpImage->RenderImage(backDC, miPosX, miPosY, TILESIZE, TILESIZE, 69, 100, 16, 16);
+	//mpImage->RenderImage(backDC, miPosX, miPosY, TILESIZE, TILESIZE, 69, 100, 16, 16);
+	mExplosionAnimation->Render(backDC);
 	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
 	SetROP2(backDC, temp);*/
