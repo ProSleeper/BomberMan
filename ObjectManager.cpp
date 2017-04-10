@@ -53,7 +53,7 @@ void ObjectManager::Update()
 
 void ObjectManager::Render(HDC backDC)
 {
-	for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Render(backDC); });
+ 	for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Render(backDC); });
 }
 
 void ObjectManager::Release()

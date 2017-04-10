@@ -34,9 +34,9 @@ bool Explosion::Update()
 void Explosion::Render(HDC backDC)
 {
 	mpImage->RenderImage(backDC, miPosX, miPosY, TILESIZE, TILESIZE, 69, 100, 16, 16);
-	int temp = SetROP2(backDC, R2_MASKPEN);
+	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
-	SetROP2(backDC, temp);
+	SetROP2(backDC, temp);*/
 	//mpImage->RenderImage(backDC, mPos.x, mPos.y, miWidth, miHeight, x, y, miWidth, miHeight);
 }
 

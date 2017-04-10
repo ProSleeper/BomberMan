@@ -105,14 +105,18 @@ enum class ACTORDIRECTION
 
 #include "Explosion.h"
 #include "EffectManager.h"
+#include "Animation.h"
+#include "IndexAnimation.h"
+#include "LoopAnimation.h"
 #include "Bomb.h"
+
 #include "Player.h"
 #include "Enemy.h"
 #include "Wall.h"
 #include "Box.h"
+
 #include "GameManager.h"
 #include "FrameCheckManager.h"
-
 #include "RenderManager.h"
 
 

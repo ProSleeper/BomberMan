@@ -33,9 +33,10 @@ void GameManager::Loop()
 void GameManager::Update()
 {
 	FPSMGR->Update();
-	//mPlayer->Update();
 	OBJECTMGR->Update();
 	COLLMGR->Update();
+
+	
 }
 
 void GameManager::Render()
@@ -45,7 +46,7 @@ void GameManager::Render()
 
 	OBJECTMGR->Render(mScreen->GetMemdc());
 	COLLMGR->Render(mScreen->GetMemdc());
-	//mPlayer->Render(mScreen->GetMemdc());
+	
 
 	BitBlt(mHdc, 0, 0, SCREENSIZEX, SCREENSIZEY, mScreen->GetMemdc(), 0, 0, SRCCOPY);
 }
@@ -68,7 +69,7 @@ void GameManager::DebugView()
 	sprintf_s(cTextBuffer, "FPS: %d", FPSMGR->GetFPS());
 	TextOut(mScreen->GetMemdc(), 1, 1, cTextBuffer, (int)strlen(cTextBuffer));
 
-	for(int x = 0; x < 18; x++)
+	/*for(int x = 0; x < 18; x++)
 	{
 		for(int y = 0; y < 32; y++)
 		{
@@ -76,7 +77,7 @@ void GameManager::DebugView()
 			TextOut(mScreen->GetMemdc(), y * 60 + 15, x * 60 + 20, cTextBuffer, strlen(cTextBuffer));
 		}
 		numberY = 0;
-	}
+	}*/
 
 	sprintf_s(cTextBuffer, "플레이어 좌표: %d, %d", mPlayer->GetPosX(), mPlayer->GetPosY());
 	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));

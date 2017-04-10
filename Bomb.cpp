@@ -18,6 +18,8 @@ void Bomb::Init(int x, int y, int w, int h, int tw, int th, float tTime)
 	mBombRect.bottom = 1;
 
 	mTag = OBJECTTAG::TAG_BOMB;
+	mBombAnimation = new LoopAnimation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOMB);
+	mBombAnimation->Init(miPosX, miPosY, 103, 151, 16, 16, 51, 17, 0.3f, true, true);
 	DistanceExplode();
 	mTime.SetUpTime(2);
 }
@@ -27,11 +29,6 @@ bool Bomb::Update()
 	if (mTime.TimeCheck())
 	{
 		Explosion* explosion;
-		/*explosion = new Explosion;
-		explosion->Init(miPosX, miPosY);
-		OBJECTMGR->CreateObject(explosion);*/
-		//MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, false);
-		//À§
 		for (int y = 0; y <= mBombRect.top; y++)
 		{
 			explosion = new Explosion;
@@ -64,18 +61,22 @@ bool Bomb::Update()
 			//MAPMGR->SetMove(miPosY / TILESIZE, (miPosX + x * TILESIZE) / TILESIZE, false);
 		}
 		MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, true);
+		delete mBombAnimation;
 		return false;
 	}
+
+	mBombAnimation->Update(miPosX, miPosY);
 	return true;
 }
 
 
 void Bomb::Render(HDC backDC)
 {
-	mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, 137, 151, 16, 16);
-	int temp = SetROP2(backDC, R2_MASKPEN);
+	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, 137, 151, 16, 16);
+	mBombAnimation->Render(backDC);
+	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
-	SetROP2(backDC, temp);
+	SetROP2(backDC, temp);*/
 	//mpImage->RenderImage(backDC, mPos.x, mPos.y, miWidth, miHeight, x, y, miWidth, miHeight);
 }
 
@@ -85,12 +86,12 @@ void Bomb::Release()
 
 void Bomb::TimeBomb()
 {
-	mTime.SetUpTime(0.0f);
+	mTime.SetUpTime(0.1f);
 }
 
 Bomb::Bomb()
 {
-	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_OBJECT);
+	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_OBJECT);
 	miPosX = 0;
 	miPosY = 0;
 	miWidth = 0;

@@ -11,5 +11,10 @@ public:
 
 	Box();
 	virtual ~Box();
+
+private:
+	Animation* mBoxAnimation[2];
+	Animation* mBox;
+
 };
 

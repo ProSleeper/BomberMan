@@ -10,9 +10,6 @@ public:
 	void Release();
 	void DropBomb();
 
-	void MoveCheck(int pos, ACTORDIRECTION pm);
-	void Player::RectColl(RECT& rect, int x, int y, int w, int h);
-
 	Player();
 	virtual ~Player();
 private:
@@ -21,20 +18,10 @@ private:
 	int useSizeY;
 	int startX;
 	int startY;
-	bool mIsBomb;
 	Image* mpImage;
 	Bomb* bomb;
-	bool IsBomb = false;
-
-	RECT up;
-	RECT down;
-	RECT left;
-	RECT right;
-
-	bool mbUp;
-	bool mbDown;
-	bool mbLeft;
-	bool mbRight;
-
+	bool mIsBomb = false;
+	Animation* mPlayerAnimation;
+	Animation* mDirection[4];
 };
 

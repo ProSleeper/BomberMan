@@ -31,6 +31,7 @@ private:
 	float pPointX;
 	float pPointY;
 
+	
 	Player *mPlayer;
 	Enemy* mEnemy;
 	Bomb* bomb;

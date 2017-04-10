@@ -122,6 +122,15 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>소스 파일\Object\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LoopAnimation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexAnimation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameCheckManager.h">
@@ -204,6 +213,15 @@
     </ClInclude>
     <ClInclude Include="Explosion.h">
       <Filter>소스 파일\Object\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexAnimation.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopAnimation.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -85,68 +85,9 @@ bool Enemy::Update()
 			startY = 2;
 		}
 	}*/
-	if((GetAsyncKeyState(73) & 0x8000) == 0x8000 && mbUp)
-	{
-	miPosY -= MONSTERSPEED;
-
-	if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_UP))
-	{
-	miPosY += MONSTERSPEED;
-	}
-	else
-	{
-	miPosX = ((miPosX + HALFTILESIZE) / TILESIZE) * TILESIZE;
-	startX = 74;
-	startY = 2;
-	}
-	}
-	else if((GetAsyncKeyState(75) & 0x8000) == 0x8000 && mbDown)
-	{
-	miPosY += MONSTERSPEED;
 
 
-	if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_DOWN))
-	{
-	miPosY -= MONSTERSPEED;
-	}
-	else
-	{
-	miPosX = ((miPosX + HALFTILESIZE) / TILESIZE) * TILESIZE;
-	startX = 2;
-	startY = 2;
-	}
-	}
-	else if((GetAsyncKeyState(74) & 0x8000) == 0x8000 && mbLeft)
-	{
-	miPosX -= MONSTERSPEED;
 
-
-	if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_LEFT))
-	{
-	miPosX += MONSTERSPEED;
-	}
-	else
-	{
-	miPosY = ((miPosY + HALFTILESIZE) / TILESIZE) * TILESIZE;
-	startX = 146;
-	startY = 2;
-	}
-	}
-	else if((GetAsyncKeyState(76) & 0x8000) == 0x8000 && mbRight)
-	{
-	miPosX += MONSTERSPEED;
-
-	if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_RIGHT))
-	{
-	miPosX -= MONSTERSPEED;
-	}
-	else
-	{
-	miPosY = ((miPosY + HALFTILESIZE) / TILESIZE) * TILESIZE;
-	startX = 218;
-	startY = 2;
-	}
-	}
 
 	return true;
 }
@@ -186,7 +127,7 @@ Enemy::Enemy()
 	miPosY = 0;
 	miWidth = 0;
 	miHeight = 0;
-	mTag = OBJECTTAG::TAG_PLAYER;
+	mTag = OBJECTTAG::TAG_ENEMY;
 }
 Enemy::~Enemy()
 {

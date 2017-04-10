@@ -21,6 +21,7 @@ private:
 	HDC mHmemDC;
 	Image* mpImage;
 	RECT mBombRect;
+	Animation* mBombAnimation;
 	bool mUp;
 	bool mDown;
 	bool mLeft;

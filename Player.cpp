@@ -8,13 +8,26 @@ void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float 
 	miWidth = w;
 	miHeight = h;
 
-	mbUp = true;
-	mbDown = true;
-	mbLeft = true;
-	mbRight = true;
-
 	startX = 71;
 	startY = 46;
+
+	mDirection[0] = new LoopAnimation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
+	mDirection[1] = new LoopAnimation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
+	mDirection[2] = new LoopAnimation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
+	mDirection[3] = new LoopAnimation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
+
+
+	mDirection[0]->Init(miPosX, miPosY, 98, 1, 15, 24, 48, 16, 0.25f, false, true);
+	mDirection[1]->Init(miPosX, miPosY, 50, 1, 15, 24, 48, 16, 0.25f, false, true);
+	mDirection[2]->Init(miPosX, miPosY, 0, 1, 16, 24, 51, 17, 0.25f, false, true);
+	mDirection[3]->Init(miPosX, miPosY, 145, 1, 16, 24, 51, 17, 0.25f, false, true);
+
+	mPlayerAnimation = mDirection[1];
+
+	//mAnimation = new Animation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
+	//mAnimation->Init(360, 240, 0, 1, 16, 24, 51, 17, 1);
+	
+	
 
 	this->useSizeX = useSizeX;
 	this->useSizeY = useSizeY;
@@ -23,10 +36,11 @@ void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float 
 
 bool Player::Update()
 {
-	if((GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000 && mbUp)
+	if((GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000)
 	{
 		miPosY -= PLAYERSPEED;
-		
+		mPlayerAnimation = mDirection[0];
+		mPlayerAnimation->SetMotion(true);
 		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_UP))
 		{
 			miPosY += PLAYERSPEED;
@@ -38,11 +52,12 @@ bool Player::Update()
 			startY = 20;
 		}
 	}
-	else if((GetAsyncKeyState(VK_DOWN) & 0x8000) == 0x8000 && mbDown)
+	else if((GetAsyncKeyState(VK_DOWN) & 0x8000) == 0x8000)
 	{
 		miPosY += PLAYERSPEED;
 		
-		
+		mPlayerAnimation = mDirection[1];
+		mPlayerAnimation->SetMotion(true);
 		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_DOWN))
 		{
 			miPosY -= PLAYERSPEED;
@@ -54,11 +69,12 @@ bool Player::Update()
 			startY = 46;
 		}
 	}
-	else if((GetAsyncKeyState(VK_LEFT) & 0x8000) == 0x8000 && mbLeft)
+	else if((GetAsyncKeyState(VK_LEFT) & 0x8000) == 0x8000)
 	{
 		miPosX -= PLAYERSPEED;
 		
-		
+		mPlayerAnimation = mDirection[2];
+		mPlayerAnimation->SetMotion(true);
 		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_LEFT))
 		{
 			miPosX += PLAYERSPEED;
@@ -70,10 +86,11 @@ bool Player::Update()
 			startY = 44;
 		}
 	}
-	else if((GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000 && mbRight)
+	else if((GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000)
 	{
 		miPosX += PLAYERSPEED;
-		
+		mPlayerAnimation = mDirection[3];
+		mPlayerAnimation->SetMotion(true);
 		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_RIGHT))
 		{
 			miPosX -= PLAYERSPEED;
@@ -85,31 +102,23 @@ bool Player::Update()
 			startY = 47;
 		}
 	}
+	else
+	{
+		mPlayerAnimation->SetMotion(false);
+	}
 	GETKEYDOWN(VK_SPACE, mIsBomb, DropBomb)
-
+	mPlayerAnimation->Update(miPosX, miPosY);
 	return true;
 }
 
 void Player::Render(HDC backDC)
 {
-	mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
-	int temp = SetROP2(backDC, R2_MASKPEN);
+	mPlayerAnimation->Render(backDC);
+	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
+	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + TILESIZE, miPosY + TILESIZE);
 
-	SetROP2(backDC, temp);
-
-	
-	/*Rectangle(backDC, up.left, up.top, up.right, up.bottom);
-	Rectangle(backDC, down.left, down.top, down.right, down.bottom);
-	Rectangle(backDC, left.left, left.top, left.right, left.bottom);
-	Rectangle(backDC, right.left, right.top, right.right, right.bottom);*/
-
-	//MAPMGR->
-
-	/*if (IsBomb)
-	{
-		bomb->Render(backDC);
-	}*/
+	SetROP2(backDC, temp);*/
 }
 
 void Player::Release()
@@ -141,13 +150,12 @@ void Player::DropBomb()
 	bomb = new Bomb;
 	bomb->Init(CenterX, CenterY, TILESIZE, TILESIZE,/**/ 67, 16, 1);
 	OBJECTMGR->CreateObject(bomb);
-	//COLLMGR->CreateCollider(bomb);
-	IsBomb = true;
+	mIsBomb = true;
 }
 
 Player::Player()
 {
-	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_PLAYER);
+	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_PLAYER);
 	miPosX = 0;
 	miPosY = 0;
 	miWidth = 0;
@@ -158,32 +166,4 @@ Player::Player()
 Player::~Player()
 {
 	Release();
-}
-
-//void Player::MoveLock(LONG& rhs)
-//{
-//	int temp = rhs % 60;
-//
-//	if(temp == 0)
-//	{
-//	}
-//	else if(temp < 10)
-//	{
-//		rhs -= temp;
-//	}
-//	else 
-//	{
-//		rhs += (60 - temp);
-//	}
-//}
-void Player::MoveCheck(int pos, ACTORDIRECTION pm)
-{
-}
-
-void Player::RectColl(RECT& rect, int x, int y, int w, int h)
-{
-	rect.left = miPosX + x;
-	rect.top = miPosY + y;
-	rect.right = miPosX + w;
-	rect.bottom = miPosY + h;
 }
