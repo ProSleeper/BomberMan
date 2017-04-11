@@ -63,7 +63,7 @@ void Box::DestroyBox()
 	mBoxAnimation[1] = new Animation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOX);
 	mBoxAnimation[1]->Init(miPosX, miPosY, 1, 151, 16, 16, 102, 17, 0.1f);
 	mBox = mBoxAnimation[1];
- 	delete mBoxAnimation[0];
+  	delete mBoxAnimation[0];
 	mIsLife = false;
 	MAPMGR->SetMove(miPosY/ TILESIZE, miPosX / TILESIZE, true);
 }

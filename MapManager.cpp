@@ -45,6 +45,7 @@ void MapManager::Render(HDC backDC)
 
 void MapManager::MapSetting()
 {
+	//세로벽
 	for(int y = 1; y < 14; y++)
 	{
 		TileMap[y][5].ImageChange(35, 49);
@@ -54,6 +55,7 @@ void MapManager::MapSetting()
 		TileMap[y][21].SetIsMove(false);
 	}
 
+	//가로벽
 	for(int x = 6; x < 21; x++)
 	{
 		TileMap[1][x].ImageChange(35, 49);
@@ -63,7 +65,7 @@ void MapManager::MapSetting()
 		TileMap[13][x].SetIsMove(false);
 	}
 
-	for(int y = 3; y < 13; y += 2)
+	/*for(int y = 3; y < 13; y += 2)
 	{
 		for(int x = 7; x < 21; x += 2)
 		{
@@ -72,13 +74,27 @@ void MapManager::MapSetting()
 
 			TileMap[y + 1][x].ImageChange(52, 32);
 		}
+	}*/
+
+	for (int i = 0; i < 11 ; i++)
+	{
+		for (int j = 0; j < 15 ; j++)
+		{
+			if (arr[i][j] == 1)
+			{
+				TileMap[i + 2][j + 6].ImageChange(35, 32);
+				TileMap[i + 2][j + 6].SetIsMove(false);
+			}
+		}
 	}
+	
+
 }
 
 bool MapManager::IsCollision(int x, int y, ACTORDIRECTION pDir)
 {
-	int MoveLTgap = 30;
-	int MoveRBgap = 30;
+	int MoveLTgap = 25;
+	int MoveRBgap = 35;
 
 	switch(pDir)
 	{

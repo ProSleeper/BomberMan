@@ -137,4 +137,4 @@ const int TILESIZE = 60;
 const int HALFTILESIZE = 30;
 
 const int PLAYERSPEED = 3;
-const int MONSTERSPEED = 3;
+const int MONSTERSPEED = 2;

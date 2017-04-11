@@ -32,8 +32,7 @@ private:
 	float pPointY;
 
 	
-	Player *mPlayer;
-	Enemy* mEnemy;
+	
 	Bomb* bomb;
 	Wall* mWall;
 	Box* mBox;

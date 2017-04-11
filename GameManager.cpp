@@ -8,13 +8,11 @@ void GameManager::Init()
 	mScreen = IMAGEMGR->GetImage(IMAGETYPE::IT_BACK);
 	mBackGround = IMAGEMGR->GetImage(IMAGETYPE::IT_BACKGROUND);
 	mBackGround->RenderImage(mScreen->GetMemdc(), 0, 0);
-	mPlayer = new Player;
-	mPlayer->Init(1200, 720, 60, 60, 16, 24, 1);
-	mEnemy = new Enemy;
-	mEnemy->Init(360, 120, 60, 60, 16, 24, 1);
+	//mPlayer = new Player;
+	//mPlayer->Init(1200, 720, 60, 60, 16, 24, 1);
+	
 
-	OBJECTMGR->CreateObject(mPlayer);
-	OBJECTMGR->CreateObject(mEnemy);
+	//OBJECTMGR->CreateObject(mPlayer);
 	OBJECTMGR->Init();
 	
 }
@@ -79,8 +77,8 @@ void GameManager::DebugView()
 		numberY = 0;
 	}*/
 
-	sprintf_s(cTextBuffer, "플레이어 좌표: %d, %d", mPlayer->GetPosX(), mPlayer->GetPosY());
-	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
+	//sprintf_s(cTextBuffer, "플레이어 좌표: %d, %d", mPlayer->GetPosX(), mPlayer->GetPosY());
+	//TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
 	sprintf_s(cTextBuffer, "오브젝트 숫자: %d", OBJECTMGR->mObjectList.size());
 	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
 }

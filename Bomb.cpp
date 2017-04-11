@@ -20,8 +20,8 @@ void Bomb::Init(int x, int y, int w, int h, int tw, int th, float tTime)
 	mTag = OBJECTTAG::TAG_BOMB;
 	mBombAnimation = new LoopAnimation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOMB);
 	mBombAnimation->Init(miPosX, miPosY, 103, 151, 16, 16, 51, 17, 0.3f, true);
-	DistanceExplode();
-	mTime.SetUpTime(4);
+	//DistanceExplode();
+	mTime.SetUpTime(2);
 }
 
 bool Bomb::Update()
