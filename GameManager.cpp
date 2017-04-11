@@ -1,5 +1,5 @@
 #include "GameCommon.h"
-random_device rd;
+
 
 void GameManager::Init()
 {
@@ -80,6 +80,8 @@ void GameManager::DebugView()
 	}*/
 
 	sprintf_s(cTextBuffer, "플레이어 좌표: %d, %d", mPlayer->GetPosX(), mPlayer->GetPosY());
+	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
+	sprintf_s(cTextBuffer, "오브젝트 숫자: %d", OBJECTMGR->mObjectList.size());
 	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
 }
 

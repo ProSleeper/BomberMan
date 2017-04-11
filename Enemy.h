@@ -6,7 +6,7 @@ public:
 	bool Update() override;
 	void Render(HDC backDC);
 	void Release();
-
+	void RandomDirection();
 
 	//void OnCollisionEnter(BaseTransform* pCollObj) override;
 
@@ -33,5 +33,10 @@ private:
 	bool mbDown;
 	bool mbLeft;
 	bool mbRight;
+
+	ACTORDIRECTION mEnemyDirection;
+	Animation* mDirection[4];
+	Animation* mEnemyAnimation;
+
 };
 

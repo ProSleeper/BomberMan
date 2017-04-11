@@ -32,6 +32,7 @@ void Box::Render(HDC backDC)
 {
 	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, 69, 32, 16, 16);
 	mBox->Render(backDC);
+	OBJECTMGR->DrawRect(backDC, miPosX, miPosY);
 	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
 	SetROP2(backDC, temp);*/
@@ -62,7 +63,7 @@ void Box::DestroyBox()
 	mBoxAnimation[1] = new Animation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOX);
 	mBoxAnimation[1]->Init(miPosX, miPosY, 1, 151, 16, 16, 102, 17, 0.1f);
 	mBox = mBoxAnimation[1];
-	delete mBoxAnimation[0];
+ 	delete mBoxAnimation[0];
 	mIsLife = false;
 	MAPMGR->SetMove(miPosY/ TILESIZE, miPosX / TILESIZE, true);
 }

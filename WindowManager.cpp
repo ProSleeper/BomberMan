@@ -35,7 +35,7 @@ void WindowManager::CreateWindowManager(HINSTANCE hInst, int w, int h, char *nam
 	mHwnd = CreateWindow(name, name, WS_BORDER | WS_CAPTION | WS_SYSMENU, 100, 100, w, h, NULL, (HMENU)NULL, mHinst, NULL);
 
 	ShowWindow(mHwnd, SW_SHOW);
-
+	
 	//ResizeWindow();
 }
 

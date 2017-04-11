@@ -35,7 +35,7 @@ void ObjectManager::Update()
 		{
 			if(GAMEMGR->IsCrashObject((*iter), mObjectList.back()))
 			{
-				mObjectList.back()->SetPosX(360);
+ 				mObjectList.back()->SetPosX(360);
 				mObjectList.back()->SetPosY(120);
 			}
 		}
@@ -67,9 +67,15 @@ bool ObjectManager::DistanceExplode(int x, int y)
 	return false;
 }
 
+void ObjectManager::DrawRect(HDC backDC, int x, int y)
+{
+	int temp = SetROP2(backDC, R2_MASKPEN);
+	Rectangle(backDC, x, y, x + 60, y + 60);
+	SetROP2(backDC, temp);
+}
+
 void ObjectManager::CreateObject(BaseImageObject* pObj)
 {
-
 	if (pObj->GetTag() == OBJECTTAG::TAG_EXPLOSION)
 	{
 		for(auto iter = mObjectList.begin(); iter != mObjectList.end();)
@@ -96,6 +102,11 @@ void ObjectManager::CreateObject(BaseImageObject* pObj)
 			}
 
 		}
+	}
+
+	if(!(MAPMGR->IsMove(pObj->GetPosY() / TILESIZE, pObj->GetPosX() / TILESIZE)))
+	{
+		return;
 	}
 	
 	mObjectList.push_front(pObj);

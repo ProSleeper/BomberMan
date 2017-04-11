@@ -1,4 +1,5 @@
 #include "GameCommon.h"
+random_device rd;
 
 
 void Enemy::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float tTime)
@@ -16,89 +17,91 @@ void Enemy::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float t
 	startX = 2;
 	startY = 2;
 
+
+	mDirection[0] = new LoopAnimation(IMAGETYPE::IT_ENEMY, OBJECTTAG::TAG_ENEMY);
+	mDirection[1] = new LoopAnimation(IMAGETYPE::IT_ENEMY, OBJECTTAG::TAG_ENEMY);
+	mDirection[2] = new LoopAnimation(IMAGETYPE::IT_ENEMY, OBJECTTAG::TAG_ENEMY);
+	mDirection[3] = new LoopAnimation(IMAGETYPE::IT_ENEMY, OBJECTTAG::TAG_ENEMY);
+
+
+	mDirection[0]->Init(miPosX, miPosY, 130, 1, 15, 23, 48, 16, 0.25f);
+	mDirection[1]->Init(miPosX, miPosY, 66, 1, 15, 23, 48, 16, 0.25f);
+	mDirection[2]->Init(miPosX, miPosY, 0, 1, 15, 23, 48, 16, 0.25f);
+	mDirection[3]->Init(miPosX, miPosY, 194, 1, 15, 23, 48, 16, 0.25f);
+
+	mEnemyAnimation = mDirection[1];
 	this->useSizeX = useSizeX;
 	this->useSizeY = useSizeY;
+	mEnemyDirection = ACTORDIRECTION::AD_DOWN;
 
 }
 
 bool Enemy::Update()
 {
-	/*if((GetAsyncKeyState(73) & 0x8000) == 0x8000 && mbUp)
+	switch (mEnemyDirection)
 	{
-		miPosY -= MONSTERSPEED;
-
-		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_UP))
-		{
-			miPosY += MONSTERSPEED;
-		}
-		else
-		{
-			miPosX = ((miPosX + HALFTILESIZE) / TILESIZE) * TILESIZE;
-			startX = 74;
-			startY = 2;
-		}
-	}
-	else if((GetAsyncKeyState(75) & 0x8000) == 0x8000 && mbDown)
-	{
-		miPosY += MONSTERSPEED;
-
-
-		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_DOWN))
+		case ACTORDIRECTION::AD_UP:
 		{
 			miPosY -= MONSTERSPEED;
+			if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_UP))
+			{
+				miPosY += MONSTERSPEED;
+				RandomDirection();
+			}
+			mEnemyAnimation = mDirection[0];
+			break;
 		}
-		else
+		case ACTORDIRECTION::AD_DOWN:
 		{
-			miPosX = ((miPosX + HALFTILESIZE) / TILESIZE) * TILESIZE;
-			startX = 2;
-			startY = 2;
+			miPosY += MONSTERSPEED;
+			if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_DOWN))
+			{
+				miPosY -= MONSTERSPEED;
+				RandomDirection();
+			}
+			mEnemyAnimation = mDirection[1];
+			break;
 		}
-	}
-	else if((GetAsyncKeyState(74) & 0x8000) == 0x8000 && mbLeft)
-	{
-		miPosX -= MONSTERSPEED;
-
-
-		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_LEFT))
-		{
-			miPosX += MONSTERSPEED;
-		}
-		else
-		{
-			miPosY = ((miPosY + HALFTILESIZE) / TILESIZE) * TILESIZE;
-			startX = 146;
-			startY = 2;
-		}
-	}
-	else if((GetAsyncKeyState(76) & 0x8000) == 0x8000 && mbRight)
-	{
-		miPosX += MONSTERSPEED;
-
-		if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_RIGHT))
+		case ACTORDIRECTION::AD_LEFT:
 		{
 			miPosX -= MONSTERSPEED;
+			if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_LEFT))
+			{
+				miPosX += MONSTERSPEED;
+				RandomDirection();
+			}
+			mEnemyAnimation = mDirection[2];
+			break;
 		}
-		else
+		case ACTORDIRECTION::AD_RIGHT:
 		{
-			miPosY = ((miPosY + HALFTILESIZE) / TILESIZE) * TILESIZE;
-			startX = 218;
-			startY = 2;
+			miPosX += MONSTERSPEED;
+			if(MAPMGR->IsCollision(miPosX, miPosY, ACTORDIRECTION::AD_RIGHT))
+			{
+				miPosX -= MONSTERSPEED;
+				RandomDirection();
+			}
+			mEnemyAnimation = mDirection[3];
+			break;
 		}
-	}*/
+		default :
+		{
+			break;
+		}
+	}
 
-
-
-
+	mEnemyAnimation->Update(miPosX, miPosY);
 	return true;
 }
 
 void Enemy::Render(HDC backDC)
 {
-	mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
+	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
 	int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + TILESIZE, miPosY + TILESIZE);
 
 	SetROP2(backDC, temp);
+	mEnemyAnimation->Render(backDC);
 
 
 	/*Rectangle(backDC, up.left, up.top, up.right, up.bottom);
@@ -116,13 +119,19 @@ void Enemy::Render(HDC backDC)
 
 void Enemy::Release()
 {
-
+	
 }
 
+void Enemy::RandomDirection()
+{
+	int a = rd() % 4;
+	
+	mEnemyDirection = static_cast<ACTORDIRECTION>(a);
+}
 
 Enemy::Enemy()
 {
-	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_ENEMY);
+	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_ENEMY);
 	miPosX = 0;
 	miPosY = 0;
 	miWidth = 0;

@@ -7,6 +7,7 @@ public:
 	void Render(HDC backDC);
 	void Release();
 	bool DistanceExplode(int x, int y);
+	void DrawRect(HDC backDC, int x, int y);
 
 	void CreateObject(BaseImageObject* pObj);
 	void DeleteObject();
@@ -15,7 +16,6 @@ public:
 	
 	ObjectManager();
 	virtual ~ObjectManager();
-private:
 	list<BaseImageObject*> mObjectList;
 	Box * box;
 };

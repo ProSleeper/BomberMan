@@ -20,8 +20,8 @@ void Bomb::Init(int x, int y, int w, int h, int tw, int th, float tTime)
 	mTag = OBJECTTAG::TAG_BOMB;
 	mBombAnimation = new LoopAnimation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOMB);
 	mBombAnimation->Init(miPosX, miPosY, 103, 151, 16, 16, 51, 17, 0.3f, true);
-	//DistanceExplode();
-	mTime.SetUpTime(2);
+	DistanceExplode();
+	mTime.SetUpTime(4);
 }
 
 bool Bomb::Update()
@@ -114,6 +114,7 @@ void Bomb::Render(HDC backDC)
 {
 	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, 137, 151, 16, 16);
 	mBombAnimation->Render(backDC);
+	OBJECTMGR->DrawRect(backDC, miPosX, miPosY);
 	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
 	SetROP2(backDC, temp);*/

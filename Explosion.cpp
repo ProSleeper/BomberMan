@@ -10,6 +10,10 @@ void Explosion::Init(int x, int y, int animX, int animY, int tw, int th, float t
 	mTime.SetUpTime(EXPLODETIME);
 	mExplosionAnimation = new LoopAnimation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_EXPLOSION);
 	mExplosionAnimation->Init(miPosX, miPosY, miWidth, miHeight, 16, 16, tw, th, tTime);
+
+	//에러나서 처리한건데... 이건 아닌듯 나중에 고쳐야함
+	miWidth = TILESIZE;
+	miHeight = TILESIZE;
 }
 
 void Explosion::Init(int x, int y)
@@ -38,6 +42,7 @@ void Explosion::Render(HDC backDC)
 {
 	//mpImage->RenderImage(backDC, miPosX, miPosY, TILESIZE, TILESIZE, 69, 100, 16, 16);
 	mExplosionAnimation->Render(backDC);
+	OBJECTMGR->DrawRect(backDC, miPosX, miPosY);
 	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
 	SetROP2(backDC, temp);*/
