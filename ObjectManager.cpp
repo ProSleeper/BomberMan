@@ -133,9 +133,9 @@ bool ObjectManager::DistanceExplode(int x, int y)
 
 void ObjectManager::DrawRect(HDC backDC, int x, int y)
 {
-	//int temp = SetROP2(backDC, R2_MASKPEN);
-	//Rectangle(backDC, x, y, x + 60, y + 60);
-	//SetROP2(backDC, temp);
+	int temp = SetROP2(backDC, R2_MASKPEN);
+	Rectangle(backDC, x , y, x + TILESIZE, y + TILESIZE);
+	SetROP2(backDC, temp);
 }
 
 void ObjectManager::CreateObject(BaseImageObject* pObj)

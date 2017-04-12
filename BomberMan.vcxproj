@@ -160,6 +160,7 @@
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="IndexAnimation.cpp" />
     <ClCompile Include="LoopAnimation.cpp" />
+    <ClCompile Include="MyQueue.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="FrameCheckManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="IndexAnimation.h" />
     <ClInclude Include="LoopAnimation.h" />
+    <ClInclude Include="MyQueue.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="FrameCheckManager.h" />
     <ClInclude Include="GameCommon.h" />

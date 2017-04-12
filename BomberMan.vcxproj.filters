@@ -131,6 +131,9 @@
     <ClCompile Include="IndexAnimation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MyQueue.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameCheckManager.h">
@@ -223,5 +226,6 @@
     <ClInclude Include="LoopAnimation.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MyQueue.h" />
   </ItemGroup>
 </Project>
