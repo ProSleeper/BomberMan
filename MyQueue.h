@@ -1,14 +1,15 @@
 #pragma once
-
-
-template<typedef T>
+template<typename T>
 class MyQueue
 {
 public:
+	void Push(T data);
+	T Pop();
+	T Peek();
 
-	void Push();
-	T* Pop();
-
+	bool IsEmpty();
+	bool IsFull();
+	int NextIdx(int arrIdx);
 
 	MyQueue();
 	virtual ~MyQueue();
@@ -16,7 +17,9 @@ public:
 private:
 	int mnFront;
 	int mnRear;
-	static const int arraySize = 100;
-	T CircleQueue[arraySize];
+	static const int mArraySize = 5;
+	T mCircleQueue[mArraySize] = {0,};
 };
+
+
 

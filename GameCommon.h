@@ -92,39 +92,30 @@ enum class ACTORDIRECTION
 #include "Image.h"
 #include "ImageManager.h"
 #include "Time.h"
+#include "MyQueue.h"
 #include "BaseTransform.h"
 #include "BaseImageObject.h"
 #include "BaseTargetObject.h"
 #include "BaseCollObject.h"
-
 #include "CollisionManager.h"
 #include "Map.h"
-
 #include "Object.h"
 #include "EnemyManager.h"
-
-
 #include "EffectManager.h"
 #include "Animation.h"
 #include "IndexAnimation.h"
 #include "LoopAnimation.h"
 #include "Explosion.h"
 #include "Bomb.h"
-
 #include "Player.h"
 #include "Enemy.h"
 #include "Wall.h"
 #include "Box.h"
-
 #include "GameManager.h"
 #include "FrameCheckManager.h"
 #include "RenderManager.h"
-
-
 #include "ObjectManager.h"
 #include "MapManager.h"
-
-
 #include "Actor.h"
 
 
