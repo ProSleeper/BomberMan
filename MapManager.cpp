@@ -65,17 +65,6 @@ void MapManager::MapSetting()
 		TileMap[13][x].SetIsMove(false);
 	}
 
-	/*for(int y = 3; y < 13; y += 2)
-	{
-		for(int x = 7; x < 21; x += 2)
-		{
-			TileMap[y][x].ImageChange(35, 32);
-			TileMap[y][x].SetIsMove(false);
-
-			TileMap[y + 1][x].ImageChange(52, 32);
-		}
-	}*/
-
 	for (int i = 0; i < 11 ; i++)
 	{
 		for (int j = 0; j < 15 ; j++)
@@ -87,8 +76,6 @@ void MapManager::MapSetting()
 			}
 		}
 	}
-	
-
 }
 
 bool MapManager::IsCollision(int x, int y, ACTORDIRECTION pDir)

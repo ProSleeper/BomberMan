@@ -19,7 +19,7 @@ bool Time::TimeCheck()
 	return false;
 }
 
-Time::Time()
+Time::Time() : mDwCurrTime(0), mDwOldTime(0), miDelayTime(0)
 {
 }
 

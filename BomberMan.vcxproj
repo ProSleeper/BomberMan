@@ -146,22 +146,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="BaseCollObject.cpp" />
     <ClCompile Include="BaseImageObject.cpp" />
-    <ClCompile Include="BaseTargetObject.cpp" />
     <ClCompile Include="BaseTransform.cpp" />
     <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="CollisionManager.cpp" />
-    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="IndexAnimation.cpp" />
     <ClCompile Include="LoopAnimation.cpp" />
     <ClCompile Include="MyQueue.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="FrameCheckManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Box.cpp" />
@@ -171,30 +164,21 @@
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="SingleTon.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="BaseCollObject.h" />
     <ClInclude Include="BaseImageObject.h" />
-    <ClInclude Include="BaseTargetObject.h" />
     <ClInclude Include="BaseTransform.h" />
     <ClInclude Include="Bomb.h" />
-    <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="IndexAnimation.h" />
     <ClInclude Include="LoopAnimation.h" />
     <ClInclude Include="MyQueue.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="FrameCheckManager.h" />
     <ClInclude Include="GameCommon.h" />
     <ClInclude Include="GameManager.h" />
@@ -205,10 +189,8 @@
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

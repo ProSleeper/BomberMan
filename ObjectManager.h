@@ -10,13 +10,17 @@ public:
 	void DrawRect(HDC backDC, int x, int y);
 
 	void CreateObject(BaseImageObject* pObj);
+	void CreateBomb(BaseImageObject* pObj);
 	void DeleteObject();
 	bool GetTag(int x, int y);
-
+	bool IsCrashObject(BaseTransform* lhs, BaseTransform* rhs);
 	
 	ObjectManager();
 	virtual ~ObjectManager();
-	list<BaseImageObject*> mObjectList;
+
+private:
+	GETTER(list<BaseImageObject*>, ObjectList, mObjectList)
+	list<BaseImageObject*> mBombList;
 	Box * box;
 	Enemy* arrEnemy[3];
 	int enemyCount;

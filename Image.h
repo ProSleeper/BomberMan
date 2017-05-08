@@ -3,11 +3,6 @@ class Image
 {
 public:
 
-	PROPERTY_FUNC(HDC, Memdc, mHmemDc)
-	PROPERTY_FUNC(int, Width, miWidth)
-	PROPERTY_FUNC(int, Height, miHeight)
-
-
 	void LoadBitImage(HDC dc, char* name, DWORD dwColor = -1);
 	void LoadBitImage(HDC dc, char* name, int fx, int fy, DWORD dwColor = -1);
 	void RenderImage(HDC backHdc, int x, int y);
@@ -20,17 +15,14 @@ public:
 	Image();
 	virtual ~Image();
 private:
+	PROPERTY_FUNC(HDC, Memdc, mHmemDc)
+	PROPERTY_FUNC(int, Width, miWidth)
+	PROPERTY_FUNC(int, Height, miHeight)
 
 	HDC mHdc;
-	HDC mHmemDc;
 	HBITMAP mHbit;
-
 	POINT mPos;
-	int miWidth;
-	int miHeight;
-
 	float mfSpeed;
-
 	DWORD mDwColor;
 
 };

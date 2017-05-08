@@ -32,7 +32,6 @@ void GameManager::Update()
 {
 	FPSMGR->Update();
 	OBJECTMGR->Update();
-	COLLMGR->Update();
 
 	
 }
@@ -43,7 +42,6 @@ void GameManager::Render()
 	DebugView();
 
 	OBJECTMGR->Render(mScreen->GetMemdc());
-	COLLMGR->Render(mScreen->GetMemdc());
 	
 
 	BitBlt(mHdc, 0, 0, SCREENSIZEX, SCREENSIZEY, mScreen->GetMemdc(), 0, 0, SRCCOPY);
@@ -79,59 +77,8 @@ void GameManager::DebugView()
 
 	//sprintf_s(cTextBuffer, "플레이어 좌표: %d, %d", mPlayer->GetPosX(), mPlayer->GetPosY());
 	//TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
-	sprintf_s(cTextBuffer, "오브젝트 숫자: %d", OBJECTMGR->mObjectList.size());
-	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, strlen(cTextBuffer));
-}
-
-void GameManager::CreateObject(BaseImageObject * pObj, bool bColl)
-{
-	mListObjects.push_back(pObj);
-	if (bColl)
-	{
-		pObj->SetCollider(true);
-		COLLMGR->CreateCollider(pObj);
-	}
-}
-
-void GameManager::DeleteObjectCheck()
-{
-	for(auto iter = mListObjects.begin(); iter != mListObjects.end();)
-	{
-		BaseTargetObject* pObj = (BaseTargetObject*)(*iter);
-
-		if (pObj->GetLife() == false)
-		{
-			ENEMYMGR->DeleteEnemy((*iter));
-
-			if (pObj->GetCollider() == true)
-			{
-				//COLLMGR->DeleteCollider((*iter));
-			}
-			
-   			delete pObj;
-			iter = mListObjects.erase(iter);
-		}
-		else
-		{
-			iter++;
-		}
-	}
-}
-
-bool GameManager::IsCrashObject(BaseTransform* lhs, BaseTransform* rhs)
-{
-	mRect1.left = lhs->GetPosX();
-	mRect1.top = lhs->GetPosY();
-	mRect1.right = lhs->GetPosX() + lhs->GetWidth();
-	mRect1.bottom = lhs->GetPosY() + lhs->GetHeight();
-
-	mRect2.left = rhs->GetPosX();
-	mRect2.top = rhs->GetPosY();
-	mRect2.right = rhs->GetPosX() + rhs->GetWidth();
-	mRect2.bottom = rhs->GetPosY() + rhs->GetHeight();
-
-
-	return IntersectRect(&mRect1, &mRect1, &mRect2);
+	sprintf_s(cTextBuffer, "오브젝트 숫자: %d", static_cast<int>(OBJECTMGR->GetObjectList().size()));
+	TextOut(mScreen->GetMemdc(), x, y += 20, cTextBuffer, static_cast<int>(strlen(cTextBuffer)));
 }
 
 GameManager::GameManager()

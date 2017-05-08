@@ -45,27 +45,12 @@ void ObjectManager::Init()
 		}
 	}
 	
-	/*Player *mPlayer = new Player;
-	mPlayer->Init(1200, 720, 60, 60, 16, 24, 1);
-
-	mEnemy = new Enemy;
-	mEnemy->Init(600, 300, 60, 60, 16, 24, 1);
-	CreateObject(mEnemy);
-	mEnemy = new Enemy;
-	mEnemy->Init(480, 480, 60, 60, 16, 24, 1);
-	CreateObject(mEnemy);
-	mEnemy = new Enemy;
-	mEnemy->Init(600, 660, 60, 60, 16, 24, 1);
-	CreateObject(mEnemy);*/
-	
 }
 ////애니메이션 효과 분명 메모리 버그 나게 되어있음
 //적까지 구현한 후 메모리 버그날만한 것들 다 잡기
 
 void ObjectManager::Update()
 {
-	//for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Update(); });
-	
 	for (auto iter = mObjectList.begin(); iter != mObjectList.end();)
 	{
 
@@ -75,14 +60,14 @@ void ObjectManager::Update()
 		}
 		if ((*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
 		{
-			if (!(GAMEMGR->IsCrashObject((*iter), mObjectList.back())))
+			if (!(IsCrashObject((*iter), mObjectList.back())))
 			{
 				MAPMGR->SetMove((*iter)->GetPosY() / TILESIZE, (*iter)->GetPosX() / TILESIZE, false);
 			}
 		}
 		else if((*iter)->GetTag() == OBJECTTAG::TAG_EXPLOSION)
 		{
-			if(GAMEMGR->IsCrashObject((*iter), mObjectList.back()))
+			if(IsCrashObject((*iter), mObjectList.back()))
 			{
  				mObjectList.back()->SetPosX(360);
 				mObjectList.back()->SetPosY(120);
@@ -140,13 +125,22 @@ void ObjectManager::DrawRect(HDC backDC, int x, int y)
 
 void ObjectManager::CreateObject(BaseImageObject* pObj)
 {
-	
+
+
+	/*for(auto iter = mBombList.begin(); iter != mBombList.end(); iter++)
+	{
+		for(auto jter = mHudleList.begin(); jter != mHudleList.end(); jter++)
+		{
+
+		}
+	}*/
+
 	for(auto iter = mObjectList.begin(); iter != mObjectList.end(); ++iter)
 	{
 		if(pObj->GetTag() == OBJECTTAG::TAG_EXPLOSION)
 		{
 			if((pObj->GetPosX() / TILESIZE) == ((*iter)->GetPosX() / TILESIZE)
-				&& (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE) && (*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
+			   && (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE) && (*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
 			{
 				Bomb* temp = dynamic_cast<Bomb*>(*iter);
 
@@ -158,20 +152,23 @@ void ObjectManager::CreateObject(BaseImageObject* pObj)
 				Box* temp = dynamic_cast<Box*>(*iter);
 
 				temp->DestroyBox();
-				
+
 			}
 		}
-		else if ((*iter)->GetTag() == OBJECTTAG::TAG_BOMB && pObj->GetTag() == OBJECTTAG::TAG_BOMB && ((pObj->GetPosX() / TILESIZE) == ((*iter)->GetPosX() / TILESIZE)
-			   && (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE)))
+		else if((*iter)->GetTag() == OBJECTTAG::TAG_BOMB && pObj->GetTag() == OBJECTTAG::TAG_BOMB && ((pObj->GetPosX() / TILESIZE) == ((*iter)->GetPosX() / TILESIZE)
+																									  && (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE)))
 		{
-  			delete pObj;
+			delete pObj;
 			return;
 		}
 	}
-	
-	mObjectList.push_front(pObj);
 
-	//COLLMGR->CreateCollider(pObj);
+	mObjectList.push_front(pObj);
+}
+
+void ObjectManager::CreateBomb(BaseImageObject * pObj)
+{
+	mBombList.push_back(pObj);
 }
 
 void ObjectManager::DeleteObject()
@@ -184,6 +181,25 @@ bool ObjectManager::GetTag(int x, int y)
 	return false;
 }
 
+bool ObjectManager::IsCrashObject(BaseTransform* lhs, BaseTransform* rhs)
+{
+	RECT mRect1;
+	RECT mRect2;
+
+	mRect1.left = lhs->GetPosX();
+	mRect1.top = lhs->GetPosY();
+	mRect1.right = lhs->GetPosX() + lhs->GetWidth();
+	mRect1.bottom = lhs->GetPosY() + lhs->GetHeight();
+
+	mRect2.left = rhs->GetPosX();
+	mRect2.top = rhs->GetPosY();
+	mRect2.right = rhs->GetPosX() + rhs->GetWidth();
+	mRect2.bottom = rhs->GetPosY() + rhs->GetHeight();
+
+
+	return IntersectRect(&mRect1, &mRect1, &mRect2);
+}
+
 ObjectManager::ObjectManager()
 {
 }
@@ -191,7 +207,3 @@ ObjectManager::ObjectManager()
 ObjectManager::~ObjectManager()
 {
 }
-
-
-
-

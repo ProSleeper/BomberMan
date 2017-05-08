@@ -1,5 +1,5 @@
 #pragma once
-class Enemy : public BaseTargetObject
+class Enemy : public BaseImageObject
 {
 public:
 	void Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float tTime);
@@ -7,9 +7,6 @@ public:
 	void Render(HDC backDC);
 	void Release();
 	void RandomDirection();
-
-	//void OnCollisionEnter(BaseTransform* pCollObj) override;
-
 
 	Enemy();
 	virtual ~Enemy();

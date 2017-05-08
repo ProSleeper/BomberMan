@@ -32,7 +32,7 @@ bool FrameCheckManager::LimitFps()
 	return false;
 }
 
-FrameCheckManager::FrameCheckManager()
+FrameCheckManager::FrameCheckManager() : miFPSCount(0), miFPS(0)
 {
 	Init();
 }

@@ -3,7 +3,7 @@ class WindowManager : public SingleTon<WindowManager>
 {
 public:
 
-	PROPERTY_FUNC(HWND, hWnd, mHwnd)
+	
 	WindowManager();
 	virtual ~WindowManager();
 
@@ -15,7 +15,7 @@ public:
 
 private:
 	HINSTANCE		mHinst;
-	HWND			mHwnd;
+	PROPERTY_FUNC(HWND, hWnd, mHwnd)
 		
 	static WindowManager* instance;
 };

@@ -155,7 +155,6 @@ void Player::DropBomb()
 
 Player::Player()
 {
-	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_PLAYER);
 	miPosX = 0;
 	miPosY = 0;
 	miWidth = 0;

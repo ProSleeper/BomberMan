@@ -2,8 +2,6 @@
 class Player : public BaseImageObject
 {
 public:
-	
-
 	void Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float tTime);
 	bool Update();
 	void Render(HDC backDC);

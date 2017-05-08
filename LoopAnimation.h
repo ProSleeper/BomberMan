@@ -7,8 +7,6 @@ public:
 	void Render(HDC backDC) override;
 	void Release();
 
-	
-
 	LoopAnimation(IMAGETYPE pType, OBJECTTAG pTag);
 	virtual ~LoopAnimation();
 

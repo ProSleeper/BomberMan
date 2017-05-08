@@ -96,7 +96,6 @@ bool Enemy::Update()
 
 void Enemy::Render(HDC backDC)
 {
-	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, startX, startY, useSizeX, useSizeY);
 	int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + TILESIZE, miPosY + TILESIZE);
 
@@ -104,17 +103,6 @@ void Enemy::Render(HDC backDC)
 	mEnemyAnimation->Render(backDC);
 
 
-	/*Rectangle(backDC, up.left, up.top, up.right, up.bottom);
-	Rectangle(backDC, down.left, down.top, down.right, down.bottom);
-	Rectangle(backDC, left.left, left.top, left.right, left.bottom);
-	Rectangle(backDC, right.left, right.top, right.right, right.bottom);*/
-
-	//MAPMGR->
-
-	/*if (IsBomb)
-	{
-	bomb->Render(backDC);
-	}*/
 }
 
 void Enemy::Release()
@@ -131,7 +119,6 @@ void Enemy::RandomDirection()
 
 Enemy::Enemy()
 {
-	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_ENEMY);
 	miPosX = 0;
 	miPosY = 0;
 	miWidth = 0;

@@ -16,15 +16,18 @@ using namespace std;
 
 #define ROOT2 1.41421f
 
-#define PROPERTY_FUNC(_Type, _FuncName, _Value)\
-public: _Type Get##_FuncName()\
-{return _Value;}\
-public: void Set##_FuncName(_Type _v)\
-{_Value = _v;}
+#define PROPERTY_FUNC(type, funcName, value) \
+    protected: type value; \
+	public: type Get##funcName()		 { return value; } \
+	public: void Set##funcName(type _v)  { value = _v;   } \
 
 #define PROPERTYARRAY_FUNC(Type, FuncName, Value)\
 public : Type Get##FuncName()\
 {return Value;}
+
+#define GETTER(type, funcName, value) \
+    protected: type value; \
+	public: type Get##funcName()		 { return value; } \
 
 
 #define WINMGR WindowManager::Instance()
@@ -95,13 +98,7 @@ enum class ACTORDIRECTION
 #include "MyQueue.h"
 #include "BaseTransform.h"
 #include "BaseImageObject.h"
-#include "BaseTargetObject.h"
-#include "BaseCollObject.h"
-#include "CollisionManager.h"
 #include "Map.h"
-#include "Object.h"
-#include "EnemyManager.h"
-#include "EffectManager.h"
 #include "Animation.h"
 #include "IndexAnimation.h"
 #include "LoopAnimation.h"
@@ -109,11 +106,9 @@ enum class ACTORDIRECTION
 #include "Bomb.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Wall.h"
 #include "Box.h"
 #include "GameManager.h"
 #include "FrameCheckManager.h"
-#include "RenderManager.h"
 #include "ObjectManager.h"
 #include "MapManager.h"
 #include "Actor.h"

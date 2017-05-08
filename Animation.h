@@ -7,7 +7,7 @@ public:
 	virtual bool Update(int x, int y);
 	void Render(HDC backDC) override;
 	void Release();
-	PROPERTY_FUNC(bool, Motion, mbMotion)
+	
 
 	Animation(IMAGETYPE pType, OBJECTTAG pTag);
 	virtual ~Animation();
@@ -23,6 +23,6 @@ protected:
 	float mAnimCurTime;
 	int FrameMove;
 	float FrameTime;
-	bool mbMotion;
+	PROPERTY_FUNC(bool, Motion, mbMotion)
 };
 
