@@ -3,11 +3,11 @@ class Box : public BaseImageObject
 {
 public:
 
-	void Init(int x, int y, int w, int h, int tw, int th, float tTime);
+	void Init(int x, int y, float tTime);
 	bool Update() override;
 	void Render(HDC backDC) override;
 	void Release();
-	void Box::DestroyBox();
+	void DestroyBox();
 
 	Box();
 	virtual ~Box();

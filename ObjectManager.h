@@ -22,6 +22,8 @@ private:
 	GETTER(list<BaseImageObject*>, ObjectList, mObjectList)
 	list<BaseImageObject*> mBombList;
 	Box * box;
+	RECT mRect1;
+	RECT mRect2;
 	Enemy* arrEnemy[3];
 	int enemyCount;
 	int arr[11][15] = {{10, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},

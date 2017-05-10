@@ -2,12 +2,10 @@
 random_device rd;
 
 
-void Enemy::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float tTime)
+void Enemy::Init(int x, int y, int useSizeX, int useSizeY, float tTime)
 {
 	miPosX = x;
 	miPosY = y;
-	miWidth = w;
-	miHeight = h;
 
 	mbUp = true;
 	mbDown = true;
@@ -121,8 +119,6 @@ Enemy::Enemy()
 {
 	miPosX = 0;
 	miPosY = 0;
-	miWidth = 0;
-	miHeight = 0;
 	mTag = OBJECTTAG::TAG_ENEMY;
 }
 Enemy::~Enemy()

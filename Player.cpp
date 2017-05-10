@@ -1,12 +1,10 @@
 #include "GameCommon.h"
 
 
-void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float tTime)
+void Player::Init(int x, int y, int useSizeX, int useSizeY, float tTime)
 {
 	miPosX = x;
 	miPosY = y;
-	miWidth = w;
-	miHeight = h;
 
 	startX = 71;
 	startY = 46;
@@ -23,15 +21,9 @@ void Player::Init(int x, int y, int w, int h, int useSizeX, int useSizeY, float 
 	mDirection[3]->Init(miPosX, miPosY, 145, 1, 16, 24, 51, 17, 0.25f);
 
 	mPlayerAnimation = mDirection[1];
-
-	//mAnimation = new Animation(IMAGETYPE::IT_PLAYER, OBJECTTAG::TAG_PLAYER);
-	//mAnimation->Init(360, 240, 0, 1, 16, 24, 51, 17, 1);
 	
-	
-
 	this->useSizeX = useSizeX;
 	this->useSizeY = useSizeY;
-	
 }
 
 bool Player::Update()
@@ -148,7 +140,7 @@ void Player::DropBomb()
 		CenterY = ((miPosY) / TILESIZE) * TILESIZE;
 	}
 	bomb = new Bomb;
-	bomb->Init(CenterX, CenterY, TILESIZE, TILESIZE,/**/ 67, 16, 1);
+	bomb->Init(CenterX, CenterY,/**/ 67, 16, 1);
 	OBJECTMGR->CreateObject(bomb);
 	mIsBomb = true;
 }
@@ -157,8 +149,6 @@ Player::Player()
 {
 	miPosX = 0;
 	miPosY = 0;
-	miWidth = 0;
-	miHeight = 0;
 	mTag = OBJECTTAG::TAG_PLAYER;
 }
 

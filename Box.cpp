@@ -1,12 +1,10 @@
 #include "GameCommon.h"
 
 
-void Box::Init(int x, int y, int w, int h, int tw, int th, float tTime)
+void Box::Init(int x, int y, float tTime)
 {
 	miPosX = x;
 	miPosY = y;
-	miWidth = w;
-	miHeight = h;
 	mIsLife = true;
 	mTime.SetUpTime(0);
 	mBoxAnimation[0] = new Animation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOX);
@@ -47,8 +45,6 @@ Box::Box()
 	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_OBJECT);
 	miPosX = 0;
 	miPosY = 0;
-	miWidth = 0;
-	miHeight = 0;
 }
 
 

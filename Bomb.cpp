@@ -1,11 +1,9 @@
 #include "GameCommon.h"
 
-void Bomb::Init(int x, int y, int w, int h, int tw, int th, float tTime)
+void Bomb::Init(int x, int y, int tw, int th, float tTime)
 {
 	miPosX = x;
 	miPosY = y;
-	miWidth = w;
-	miHeight = h;
 
 	mUp = true;
 	mDown = true;
@@ -132,11 +130,8 @@ void Bomb::TimeBomb()
 
 Bomb::Bomb()
 {
-	//mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_OBJECT);
 	miPosX = 0;
 	miPosY = 0;
-	miWidth = 0;
-	miHeight = 0;
 }
 
 Bomb::~Bomb()

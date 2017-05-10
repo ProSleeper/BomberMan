@@ -25,20 +25,20 @@ void ObjectManager::Init()
 			if(arr[i][j] == 1)
 			{
 				box = new Box;
-				box->Init(j * TILESIZE + 360, i * TILESIZE + 120, 60, 60, 60, 60, 1);
+				box->Init(j * TILESIZE + 360, i * TILESIZE + 120, 1);
 				CreateObject(box);
 				MAPMGR->SetMove(i + 2 , j + 6, false);
 			}
 			else if(arr[i][j] == 10)
 			{
 				Player *mPlayer = new Player;
-				mPlayer->Init(360, 120, 60, 60, 16, 24, 1);
+				mPlayer->Init(360, 120, 16, 24, 1);
 				CreateObject(mPlayer);
 			}
 			else if(arr[i][j] == 9)
 			{
 				mEnemy = new Enemy;
-				mEnemy->Init(j * TILESIZE + 360, i * TILESIZE + 120, 60, 60, 16, 24, 1);
+				mEnemy->Init(j * TILESIZE + 360, i * TILESIZE + 120, 16, 24, 1);
 				arrEnemy[enemyCount++] = mEnemy;
 				CreateObject(mEnemy);
 			}
@@ -168,7 +168,7 @@ void ObjectManager::CreateObject(BaseImageObject* pObj)
 
 void ObjectManager::CreateBomb(BaseImageObject * pObj)
 {
-	mBombList.push_back(pObj);
+	mBombList.push_front(pObj);
 }
 
 void ObjectManager::DeleteObject()
@@ -183,9 +183,6 @@ bool ObjectManager::GetTag(int x, int y)
 
 bool ObjectManager::IsCrashObject(BaseTransform* lhs, BaseTransform* rhs)
 {
-	RECT mRect1;
-	RECT mRect2;
-
 	mRect1.left = lhs->GetPosX();
 	mRect1.top = lhs->GetPosY();
 	mRect1.right = lhs->GetPosX() + lhs->GetWidth();

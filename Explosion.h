@@ -8,9 +8,6 @@ public:
 	void Render(HDC backDC);
 	void Release();
 
-	PROPERTY_FUNC(int, Width, miWidth)
-		PROPERTY_FUNC(int, Height, miHeight)
-
 	Explosion();
 	virtual ~Explosion();
 private:
