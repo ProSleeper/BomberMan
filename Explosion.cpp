@@ -16,7 +16,7 @@ void Explosion::Init(int x, int y)
 {
 	miPosX = x;
 	miPosY = y;
-	mTag = OBJECTTAG::TAG_EXPLOSION;
+	
 	mTime.SetUpTime(EXPLODETIME);
 }
 
@@ -25,10 +25,10 @@ bool Explosion::Update()
 	if(mTime.TimeCheck())
 	{
 		//MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, true);
-		return false;
+		mIsLife = false;
 	}
 	mExplosionAnimation->Update(miPosX, miPosY);
-	return true;
+	return mIsLife;
 }
 
 
@@ -36,7 +36,7 @@ void Explosion::Render(HDC backDC)
 {
 	//mpImage->RenderImage(backDC, miPosX, miPosY, TILESIZE, TILESIZE, 69, 100, 16, 16);
 	mExplosionAnimation->Render(backDC);
-	OBJECTMGR->DrawRect(backDC, miPosX, miPosY);
+	//OBJECTMGR->DrawRect(backDC, miPosX, miPosY);
 	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
 	SetROP2(backDC, temp);*/
@@ -50,6 +50,7 @@ void Explosion::Release()
 Explosion::Explosion()
 {
 	mpImage = IMAGEMGR->GetImage(IMAGETYPE::IT_OBJECT);
+	mTag = OBJECTTAG::TAG_EXPLOSION;
 	miPosX = 0;
 	miPosY = 0;
 }

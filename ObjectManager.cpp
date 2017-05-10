@@ -56,7 +56,7 @@ void ObjectManager::Update()
 
 		if((*iter) == nullptr)
 		{
-			continue;;
+			continue;
 		}
 		if ((*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
 		{
@@ -67,6 +67,10 @@ void ObjectManager::Update()
 		}
 		else if((*iter)->GetTag() == OBJECTTAG::TAG_EXPLOSION)
 		{
+			/*if (!(MAPMGR->IsMove((*iter)->GetPosY(), (*iter)->GetPosX())))
+			{
+			}*/
+
 			if(IsCrashObject((*iter), mObjectList.back()))
 			{
  				mObjectList.back()->SetPosX(360);
@@ -103,7 +107,15 @@ void ObjectManager::Update()
 
 void ObjectManager::Render(HDC backDC)
 {
- 	for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Render(backDC); });
+ 	//for_each(mObjectList.begin(), mObjectList.end(), [&](BaseImageObject* btf){btf->Render(backDC); });
+
+	for(auto iter = mObjectList.begin(); iter != mObjectList.end(); iter++)
+	{
+		if (((*iter)->GetTag() != OBJECTTAG::TAG_EXPLOSION) || (MAPMGR->IsMove((*iter)->GetPosY() / TILESIZE, (*iter)->GetPosX() / TILESIZE)))
+		{
+			(*iter)->Render(backDC);
+		}
+	}
 }
 
 void ObjectManager::Release()
@@ -118,9 +130,9 @@ bool ObjectManager::DistanceExplode(int x, int y)
 
 void ObjectManager::DrawRect(HDC backDC, int x, int y)
 {
-	int temp = SetROP2(backDC, R2_MASKPEN);
+	/*int temp = SetROP2(backDC, R2_MASKPEN);
 	Rectangle(backDC, x , y, x + TILESIZE, y + TILESIZE);
-	SetROP2(backDC, temp);
+	SetROP2(backDC, temp);*/
 }
 
 void ObjectManager::CreateObject(BaseImageObject* pObj)
@@ -143,7 +155,6 @@ void ObjectManager::CreateObject(BaseImageObject* pObj)
 			   && (pObj->GetPosY() / TILESIZE) == ((*iter)->GetPosY() / TILESIZE) && (*iter)->GetTag() == OBJECTTAG::TAG_BOMB)
 			{
 				Bomb* temp = dynamic_cast<Bomb*>(*iter);
-
 				temp->TimeBomb();
 			}
 			else if((pObj->GetPosX() / TILESIZE) == ((*iter)->GetPosX() / TILESIZE)

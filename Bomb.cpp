@@ -42,7 +42,6 @@ bool Bomb::Update()
 			explosion = new Explosion;
 			explosion->Init(miPosX , miPosY - y * TILESIZE , 1, 134, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
-			//MAPMGR->SetMove((miPosY - y * TILESIZE) / TILESIZE, miPosX / TILESIZE, false);
 		}
 		//아래
 		for(int y = 1; y <= mBombRect.bottom; y++)
@@ -57,10 +56,6 @@ bool Bomb::Update()
 			explosion = new Explosion;
 			explosion->Init(miPosX, miPosY + y * TILESIZE, 1, 134, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
-			/*explosion = new Explosion;
-			explosion->Init(miPosX, miPosY + y * TILESIZE);
-			OBJECTMGR->CreateObject(explosion);*/
-			//MAPMGR->SetMove((miPosY + y * TILESIZE) / TILESIZE, miPosX / TILESIZE, false);
 		}
 		//왼쪽
 		for(int x = 1; x <= mBombRect.left; x++)
@@ -75,10 +70,6 @@ bool Bomb::Update()
 			explosion = new Explosion;
 			explosion->Init(miPosX - x * TILESIZE, miPosY, 1, 100, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
-			/*explosion = new Explosion;
-			explosion->Init(miPosX - x * TILESIZE, miPosY);
-			OBJECTMGR->CreateObject(explosion);*/
-			//MAPMGR->SetMove(miPosY / TILESIZE, (miPosX - x * TILESIZE) / TILESIZE, false);
 		}
 		//오른쪽
 		for(int x = 1; x <= mBombRect.right; x++)
@@ -93,10 +84,6 @@ bool Bomb::Update()
 			explosion = new Explosion;
 			explosion->Init(miPosX + x * TILESIZE, miPosY, 1, 100, 85, 17, 0.05f);
 			OBJECTMGR->CreateObject(explosion);
-			/*explosion = new Explosion;
-			explosion->Init(miPosX + x * TILESIZE, miPosY);
-			OBJECTMGR->CreateObject(explosion);*/
-			//MAPMGR->SetMove(miPosY / TILESIZE, (miPosX + x * TILESIZE) / TILESIZE, false);
 		}
 		MAPMGR->SetMove(miPosY / TILESIZE, miPosX / TILESIZE, true);
 		delete mBombAnimation;
@@ -110,13 +97,7 @@ bool Bomb::Update()
 
 void Bomb::Render(HDC backDC)
 {
-	//mpImage->RenderImage(backDC, miPosX, miPosY, miWidth, miHeight, 137, 151, 16, 16);
 	mBombAnimation->Render(backDC);
-	OBJECTMGR->DrawRect(backDC, miPosX, miPosY);
-	/*int temp = SetROP2(backDC, R2_MASKPEN);
-	Rectangle(backDC, miPosX, miPosY, miPosX + 60, miPosY + 60);
-	SetROP2(backDC, temp);*/
-	//mpImage->RenderImage(backDC, mPos.x, mPos.y, miWidth, miHeight, x, y, miWidth, miHeight);
 }
 
 void Bomb::Release()
