@@ -117,8 +117,8 @@ enum class ACTORDIRECTION
 const int SCREENSIZEX = 1600;
 const int SCREENSIZEY = 900;
 
-const int TILECOUNTX = 15;
-const int TILECOUNTY = 27;
+const int TILECOUNTX = 13;
+const int TILECOUNTY = 17;
 const int TILESIZE = 60;
 const int HALFTILESIZE = 30;
 

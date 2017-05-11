@@ -1,14 +1,12 @@
 #include "GameCommon.h"
 
 
-void BaseImageObject::Init(int rendX, int rendY, int rendWidth, int rendHeight, int cutX, int cutY, int cutWidth, int cutHeight, IMAGETYPE type)
+void BaseImageObject::Init(int rendX, int rendY, int cutX, int cutY, int cutWidth, int cutHeight, IMAGETYPE type)
 {
 	mpImage = IMAGEMGR->GetImage(type);
 
 	miPosX = rendX;
 	miPosY = rendY;
-	miWidth = rendWidth;
-	miHeight = rendHeight;
 
 	mCutRect.left = cutX;
 	mCutRect.top = cutY;
@@ -60,6 +58,8 @@ BaseImageObject::BaseImageObject()
 	mbCollider = false;
 	isMove = true;
 	mIsLife = true;
+	miWidth = TILESIZE;
+	miHeight = TILESIZE;
 }
 
 

@@ -3,7 +3,7 @@ class BaseImageObject : public BaseTransform
 {
 public:
 
-	virtual void Init(int rendX, int rendY, int rendWidth, int rendHeight, int cutX, int cutY, int cutWidth, int cutHeight, IMAGETYPE type);
+	virtual void Init(int rendX, int rendY, int cutX, int cutY, int cutWidth, int cutHeight, IMAGETYPE type);
 	virtual void Init(int x, int y, int w, int h, IMAGETYPE type);
 	virtual void Init(int x, int y, IMAGETYPE type);
 	virtual bool Update() { return true; }

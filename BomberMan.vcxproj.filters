@@ -45,6 +45,9 @@
     <Filter Include="소스 파일\Helper\h">
       <UniqueIdentifier>{d44f5c07-b744-4e34-b7c2-1fd4a958b7fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Data">
+      <UniqueIdentifier>{daf7a461-e483-4ed3-acf2-5310ce5056a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameCheckManager.cpp">
@@ -180,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>소스 파일\Helper\h</Filter>
+    </ClInclude>
+    <ClInclude Include="MapData.h">
+      <Filter>소스 파일\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

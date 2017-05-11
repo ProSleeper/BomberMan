@@ -1,4 +1,16 @@
 #pragma once
+
+enum class TILETYPE_PIECETOWN
+{
+	TT_DEFAULT,
+	TT_DEFAULT_BUILDING_SHADOW,
+	TT_INNER_BUILDING = 3,
+	TT_OUTTER_BUILDING = 12,
+	TT_MAX
+};
+
+#define TT(X) static_cast<int>(TILETYPE_PIECETOWN::X)
+
 class MapManager : public SingleTon<MapManager>
 {
 public:
@@ -21,6 +33,7 @@ private:
 	
 	RECT rect;
 	vector<vector<Map>> TileMap;
+	Map tile[TT(TT_MAX)];
 	int arr[11][15] = {{	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 						{0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
 						{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
