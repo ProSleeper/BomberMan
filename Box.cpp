@@ -8,7 +8,7 @@ void Box::Init(int x, int y, float tTime)
 	mIsLife = true;
 	mTime.SetUpTime(0);
 	mBoxAnimation[0] = new Animation(IMAGETYPE::IT_OBJECT, OBJECTTAG::TAG_BOX);
-	mBoxAnimation[0]->Init(miPosX, miPosY, 69, 32, 16, 16, 68, 17, 0.1f);
+	mBoxAnimation[0]->Init(miPosX, miPosY, 69, 15, 16, 16, 68, 17, 0.1f);
 
 	mBox = mBoxAnimation[0];
 

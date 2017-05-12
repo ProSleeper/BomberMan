@@ -8,46 +8,45 @@ MapManager::MapManager()
 {
 	TileMap.assign(TILECOUNTX, vector<Map>(TILECOUNTY));
 
-	tile[TT(TT_DEFAULT)].Init(0,0, 52, 49, 16, 16, IMAGETYPE::IT_OBJECT);
-	tile[TT(TT_DEFAULT_BUILDING_SHADOW)].Init(0, 0, 52, 32, 16, 16, IMAGETYPE::IT_OBJECT);
-	tile[TT(TT_INNER_BUILDING)].Init(0, 0, 35, 32, 16, 16, IMAGETYPE::IT_OBJECT);
-	tile[TT(TT_OUTTER_BUILDING)].Init(0, 0, 35, 49, 16, 16, IMAGETYPE::IT_OBJECT);
-
-
+	MapSetting();
+	
 	for (int x = 0; x < 13; x++)
 	{
 		for (int y = 0; y < 17; y++)
 		{
+			TileMap[x][y] = tile[mapData[x][y]];
+			TileMap[x][y].SetPosX(TILESIZE * y + 300);
+			TileMap[x][y].SetPosY(TILESIZE * x + 60);
+			if (mapData[x][y] < 2)
+			{
+				TileMap[x][y].SetIsMove(true);
+			}
+			else
+			{
+				TileMap[x][y].SetIsMove(false);
+			}
 			
 		}
 	}
-
-	for(int x = 1; x < TILECOUNTX - 1; x++)
-	{
-		for(int y = 5; y < TILECOUNTY - 5; y++)
-		{
-			TileMap[x][y].Init(TILESIZE * y, TILESIZE * x, 52, 32, 16, 16, IMAGETYPE::IT_OBJECT);
-		}
-	}
-	MapSetting();
 }
 
 MapManager::~MapManager()
 {
 }
+
 Map MapManager::GetIdx(int x, int y)
 {
-	return TileMap[x - 6][y - 2];
+	return TileMap[x - 1][y - 5];
 }
 
 bool MapManager::IsMove(int x, int y)
 {
-	return TileMap[x - 6][y - 2].GetIsMove();
+	return TileMap[x - 1][y - 5].GetIsMove();
 }
 
 void MapManager::SetMove(int x, int y, bool bMove)
 {
-	return TileMap[x - 6][y - 2].SetIsMove(bMove);
+	return TileMap[x - 1][y - 5].SetIsMove(bMove);
 }
 
 void MapManager::Render(HDC backDC)
@@ -63,37 +62,10 @@ void MapManager::Render(HDC backDC)
 
 void MapManager::MapSetting()
 {
-	////세로벽
-	//for(int y = 1; y < 14; y++)
-	//{
-	//	TileMap[y][5].ImageChange(35, 49);
-	//	TileMap[y][5].SetIsMove(false);
-
-	//	TileMap[y][21].ImageChange(35, 49);
-	//	TileMap[y][21].SetIsMove(false);
-	//}
-
-	////가로벽
-	//for(int x = 6; x < 21; x++)
-	//{
-	//	TileMap[1][x].ImageChange(35, 49);
-	//	TileMap[1][x].SetIsMove(false);
-
-	//	TileMap[13][x].ImageChange(35, 49);
-	//	TileMap[13][x].SetIsMove(false);
-	//}
-
-	//for (int i = 0; i < 11 ; i++)
-	//{
-	//	for (int j = 0; j < 15 ; j++)
-	//	{
-	//		if (arr[i][j] == 1)
-	//		{
-	//			TileMap[i + 2][j + 6].ImageChange(35, 32);
-	//			TileMap[i + 2][j + 6].SetIsMove(false);
-	//		}
-	//	}
-	//}
+	tile[TT(TT_DEFAULT)].Init(0, 0, 52, 49, 16, 16, IMAGETYPE::IT_OBJECT);
+	tile[TT(TT_DEFAULT_BUILDING_SHADOW)].Init(0, 0, 52, 32, 16, 16, IMAGETYPE::IT_OBJECT);
+	tile[TT(TT_INNER_BUILDING)].Init(0, 0, 35, 32, 16, 16, IMAGETYPE::IT_OBJECT);
+	tile[TT(TT_OUTTER_BUILDING)].Init(0, 0, 35, 49, 16, 16, IMAGETYPE::IT_OBJECT);
 
 }
 
@@ -101,6 +73,8 @@ bool MapManager::IsCollision(int x, int y, ACTORDIRECTION pDir)
 {
 	int MoveLTgap = 25;
 	int MoveRBgap = 35;
+	x -= 300;
+	y -= 60;
 
 	switch(pDir)
 	{
