@@ -3,7 +3,7 @@
 
 void ObjectManager::Init()
 {
-	Enemy* mEnemy = new Enemy;
+	Enemy* mEnemy;
 
 	/*for(int y = 4; y < 12; y += 2)
 	{

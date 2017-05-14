@@ -17,15 +17,7 @@ MapManager::MapManager()
 			TileMap[x][y] = tile[mapData[x][y]];
 			TileMap[x][y].SetPosX(TILESIZE * y + 300);
 			TileMap[x][y].SetPosY(TILESIZE * x + 60);
-			if (mapData[x][y] < 2)
-			{
-				TileMap[x][y].SetIsMove(true);
-			}
-			else
-			{
-				TileMap[x][y].SetIsMove(false);
-			}
-			
+			TileMap[x][y].SetIsMove(mapData[x][y] < 2 ? true : false);
 		}
 	}
 }
