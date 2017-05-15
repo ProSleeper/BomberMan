@@ -27,12 +27,10 @@ public:
 
 	MapManager();
 	virtual ~MapManager();
-
-	
-
 private:
 	
 	RECT rect;
 	vector<vector<Map>> TileMap;
 	Map tile[TT(TT_MAX)];
+
 };

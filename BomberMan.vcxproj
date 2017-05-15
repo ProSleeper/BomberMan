@@ -174,11 +174,11 @@
     <ClInclude Include="BaseImageObject.h" />
     <ClInclude Include="BaseTransform.h" />
     <ClInclude Include="Bomb.h" />
-    <ClInclude Include="MapData.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="IndexAnimation.h" />
     <ClInclude Include="LoopAnimation.h" />
+    <ClInclude Include="MapData.h" />
     <ClInclude Include="MyQueue.h" />
     <ClInclude Include="FrameCheckManager.h" />
     <ClInclude Include="GameCommon.h" />
@@ -188,6 +188,7 @@
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="ObjectData.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Singleton.h" />

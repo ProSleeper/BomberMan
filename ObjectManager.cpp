@@ -1,35 +1,23 @@
 #include "GameCommon.h"
-
+#include "ObjectData.h"
 
 void ObjectManager::Init()
 {
 	Enemy* mEnemy;
 
-	/*for(int y = 4; y < 12; y += 2)
+	for (int i = 0; i < 13 ; i++)
 	{
-		for(int x = 7; x < 21; x += 2)
+		for (int j = 0; j < 17 ; j++)
 		{
-			box = new Box;
-			box->Init(x * TILESIZE, y * TILESIZE, 60, 60, 60, 60, 1);
-			CreateObject(box);
-			MAPMGR->SetMove(y, x, false);
-		}
-	}*/
-	/*Player *mPlayer = new Player;
-	mPlayer->Init(360, 120, 60, 60, 16, 24, 1);
-	CreateObject(mPlayer);*/
-	for (int i = 0; i < 11 ; i++)
-	{
-		for (int j = 0; j < 15 ; j++)
-		{
-			if(arr[i][j] == 1)
+			if(ObjectData[i][j] == 1)
 			{
 				box = new Box;
-				box->Init(j * TILESIZE + 360, i * TILESIZE + 120, 1);
+				box->Init(j * TILESIZE + 300, i * TILESIZE + 60, 1);
 				CreateObject(box);
-				MAPMGR->SetMove(i + 2 , j + 6, false);
+				MAPMGR->SetMove(i + 1 , j + 5, false);
 			}
-			else if(arr[i][j] == 10)
+
+			if(arr[i][j] == 10)
 			{
 				Player *mPlayer = new Player;
 				mPlayer->Init(360, 120, 16, 24, 1);

@@ -91,6 +91,7 @@ enum class ACTORDIRECTION
 	AD_RIGHT
 };
 
+
 #include "SingleTon.cpp"
 #include "WindowManager.h"
 #include "Image.h"

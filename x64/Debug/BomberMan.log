@@ -1,3 +1,4 @@
-﻿  MapManager.cpp
-  BomberMan.vcxproj -> C:\Users\wyk\Documents\GitHub\MyHub\BomberMan\x64\Debug\BomberMan.exe
-  BomberMan.vcxproj -> C:\Users\wyk\Documents\GitHub\MyHub\BomberMan\x64\Debug\BomberMan.pdb (Full PDB)
+﻿  ObjectManager.cpp
+c:\users\kitrigame\documents\github\bomberman\objectmanager.cpp(196): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  BomberMan.vcxproj -> C:\Users\KITRIGAME\Documents\GitHub\BomberMan\x64\Debug\BomberMan.exe
+  BomberMan.vcxproj -> C:\Users\KITRIGAME\Documents\GitHub\BomberMan\x64\Debug\BomberMan.pdb (Full PDB)

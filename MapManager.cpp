@@ -1,9 +1,6 @@
 #include "GameCommon.h"
 #include "MapData.h"
 
-//여기 전부 갈아 없어야 함!
-//문제를 찾아서 출발~
-
 MapManager::MapManager()
 {
 	TileMap.assign(TILECOUNTX, vector<Map>(TILECOUNTY));
@@ -14,10 +11,10 @@ MapManager::MapManager()
 	{
 		for (int y = 0; y < 17; y++)
 		{
-			TileMap[x][y] = tile[mapData[x][y]];
+			TileMap[x][y] = tile[MapData[x][y]];
 			TileMap[x][y].SetPosX(TILESIZE * y + 300);
 			TileMap[x][y].SetPosY(TILESIZE * x + 60);
-			TileMap[x][y].SetIsMove(mapData[x][y] < 2 ? true : false);
+			TileMap[x][y].SetIsMove(MapData[x][y] < 2 ? true : false);
 		}
 	}
 }

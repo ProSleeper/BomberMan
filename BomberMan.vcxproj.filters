@@ -187,5 +187,8 @@
     <ClInclude Include="MapData.h">
       <Filter>소스 파일\Data</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectData.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
